@@ -35,10 +35,10 @@ export default function Category() {
       <div className="w-full flex flex-col gap-4">
         <div className="relative">
           <h1 className="text-8xl tracking-widest text-gray-200 font-semibold">
-            FEATURE
+            Features
           </h1>
-          <h1 className="graph-title absolute bottom-8 left-2 ">
-            -FEATURES PRODUCTS
+          <h1 className="graph-title absolute bottom-6 left-2 ">
+            ---Featured Products---
           </h1>
         </div>
         <div className="flex justify-end admin-gap items-end overflow-x-scroll">

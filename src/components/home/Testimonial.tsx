@@ -31,9 +31,10 @@ const shoeReviews = [
 export default function Testimonial() {
   return (
     <div className="flex flex-col admin-gap">
-      <div className="text-center">
-        <h2 className="text-3xl tracking-tight text-slate-900 sm:text-4xl">
-          What Our Customers Are Saying
+      <div className="text-center relative">
+        <h1 className="shadow-title">Customer Stories</h1>
+        <h2 className="text-3xl tracking-tight absolute bottom-10 left-10 right-10 top-10 text-slate-900 sm:text-4xl">
+          ---What Our Customers Are Saying---
         </h2>
       </div>
       <div className="grid grid-cols-1 admin-gap  lg:grid-cols-3">

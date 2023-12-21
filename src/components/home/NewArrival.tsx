@@ -65,9 +65,9 @@ const NewArrivals = () => {
     <section className="bg-white">
       <main className=" main-container main-spacing pb-16 flex flex-col">
         <article className="flex flex-col relative gap-1 items-center">
-          <div className="shadow-title ">NEW ARRIVALS</div>
+          <div className="shadow-title ">New Arrivals</div>
           <div className="w-full text-center absolute top-10 left-10 right-10 bottom-10">
-            <h2 className="graph-title">Find Out New Arrivals</h2>
+            <h2 className="graph-title">---Find Out New Arrivals---</h2>
           </div>
         </article>
 

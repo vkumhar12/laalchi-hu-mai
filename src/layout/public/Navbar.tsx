@@ -18,7 +18,7 @@ interface ISubArr {
   description?: string;
   path: string;
 }
-interface ISolutionData {
+interface AllICategory {
   _id: string;
   title: string;
   subArr: ISubArr[];
@@ -29,35 +29,42 @@ interface IResourceData {
   subArr: ISubArr[];
 }
 
-export const solutionData: ISolutionData = {
+export const allCategory: AllICategory = {
   _id: "1",
-  title: "By industry",
+  title: "",
   subArr: [
     {
       _id: "1.1",
-      icon: "/icon-1.svg",
-      title: "Category",
-      description: "Meet compliance and protect long term value",
+      icon: "/product-release.png",
+      title: "NEW RELEASES",
+      description: "New shoe styles just landed check them out..!",
       path: "/solutions/business",
     },
     {
       _id: "1.2",
-      icon: "/icon-2.svg",
-      title: "Academic institutions",
-      description: "Meet compliance and protect long term value",
+      icon: "/puzzle.png",
+      title: "FEATURES SHOES",
+      description: "Check out our latest feature releases..!",
       path: "/solutions/academic-institutions",
     },
     {
       _id: "1.3",
-      icon: "/icon-3.svg",
-      title: "Government",
-      description: "Meet compliance and protect long term value",
+      icon: "/increase.png",
+      title: " NEW TRENDING",
+      description: "Shop the newest shoe trends now..!",
+      path: "/solutions/government",
+    },
+    {
+      _id: "1.4",
+      icon: "/best-seller.png",
+      title: " BEST SELLER",
+      description: "See our best sellers today..!",
       path: "/solutions/government",
     },
   ],
 };
 
-export const featureData: ISolutionData = {
+export const featureData: AllICategory = {
   _id: "1",
   title: "Features",
   subArr: [
@@ -112,7 +119,7 @@ export const featureData: ISolutionData = {
   ],
 };
 
-export const aboutData: ISolutionData = {
+export const aboutData: AllICategory = {
   _id: "1",
   title: "Preservica",
   subArr: [
@@ -282,36 +289,7 @@ const Navbar = () => {
     setKeyword(event.target.value);
   };
   const scrollPosition = useScrollPosition();
-  // const [searchTitle, setSearchTitle] = useState("");
-  // const [openSearch, setOpenSearch] = useState(false);
-  // const mainDivRef = useRef<HTMLDivElement | null>(null);
 
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     console.log("run");
-  //     if (
-  //       openSearch &&
-  //       mainDivRef.current &&
-  //       (
-  //         event.target instanceof Node &&
-  //         mainDivRef.current.contains(event.target)
-  //       )
-  //     ) {
-  //       setOpenSearch(false);
-  //     }
-  //   };
-  //   const handleKeyDown = (event: KeyboardEvent) => {
-  //     if (event.key === "Escape") {
-  //       setOpenSearch(false);
-  //     }
-  //   };
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   document.addEventListener("keydown", handleKeyDown);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, [openSearch, setOpenSearch]);
   return (
     <header className="w-full sticky z-[999] top-0">
       <nav
@@ -320,12 +298,16 @@ const Navbar = () => {
         }`}
       >
         <section className="hidden main-container lg:flex items-center justify-between ">
-          <aside className="w-[60%] flex justify-between items-center gap-8">
+          <aside className="w-[70%] flex justify-between items-center gap-8">
             <Link href="">
-              <img src="/logo.png" alt="main-logo" className="w-40 " />
+              <img
+                src="/logo.png"
+                alt="laalchi-hu-mai-logo"
+                className="w-40 "
+              />
             </Link>
             <div className="flex items-center gap-8 pl-4">
-              <HoverDropdown title="Category" path="" data={solutionData} />
+              <HoverDropdown title="Category" path="" data={allCategory} />
               {/* <HoverDropdown title="Mens" path="" data={featureData} /> */}
               {/* <ResourceDropdown title="Women" path="" data={resourceData} /> */}
               <div className="font-medium text-lg">Mens</div>
@@ -336,29 +318,32 @@ const Navbar = () => {
               {/* <HoverDropdown title="Contact" path="/pricing" /> */}
             </div>
           </aside>
-          <aside className="w-[40%] flex items-center text-2xl justify-end gap-4">
+          <aside className="w-[30%] flex items-center text-2xl justify-end gap-1">
             <Tooltip title="Search Product">
-              <span className="hover:cursor-pointer" onClick={toggleSearch}>
+              <button
+                className="cursor-pointer text-pink-blue p-2  hover:bg-pink-blue/10 rounded-md common-transition"
+                onClick={toggleSearch}
+              >
                 <IoSearchOutline className="text-lg " />
-              </span>
+              </button>
             </Tooltip>
             <Tooltip title="Login">
               <Link href="">
-                <span className="text-lg">
+                <button className=" text-secondary text-lg p-2  hover:bg-secondary/10 rounded-md cursor-pointer common-transition">
                   <IoPersonAddOutline />
-                </span>
+                </button>
               </Link>
             </Tooltip>
             <Tooltip title="Cart">
               <Link href="">
-                <button className="text-lg">
+                <button className="text-lg text-dark p-2  hover:bg-dark/10 rounded-md cursor-pointer common-transition">
                   <BsCart3 />
                 </button>
               </Link>
             </Tooltip>
             <Tooltip title="Wishlist">
               <Link href="">
-                <button className="text-lg">
+                <button className="text-lg text-pinterest/80 p-2  hover:bg-pinterest/10 rounded-md cursor-pointer common-transition">
                   <FaRegHeart />
                 </button>
               </Link>
@@ -404,45 +389,6 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      {/* <div
-        className={`flex justify-center z-[9999] bg-[#120A44] bg-opacity-100 ${
-          openSearch ? "fixed  inset-0" : "hidden"
-        }`}
-      >
-        <div className="p-4 rounded-md w-full flex justify-center items-center relative">
-          <p
-            // onClick={() => setOpenSearch(false)}
-            className="absolute top-3 right-3 cursor-pointer"
-          >
-            <FaX className="font-bold p-2 rounded-full border-2 border-white text-white text-4xl" />
-          </p>
-          <div ref={mainDivRef} className="w-1/2 p-3 rounded-lg mt-10">
-            <form>
-              <div className="flex relative gap-2">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <BiSearchAlt2 className="text-2xl" />
-                </div>
-
-                <input
-                  value={searchTitle}
-                  onChange={(e) => setSearchTitle(e.target.value)}
-                  type="search"
-                  className="block outline-none w-full p-4 pl-10 text-sm text-gray-900 border-3 border-blue-500 rounded bg-gray-50"
-                  placeholder="I am looking for..."
-                  required
-                />
-                <button
-                  type="submit"
-                  className="text-white capitalize px-5 py-2 border-primary rounded bg-gradient-to-r from-primary to-secondary"
-                >
-                  Search
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div> */}
-      {/* <Search /> */}
     </header>
   );
 };
@@ -454,7 +400,7 @@ const HoverDropdown = ({
   path,
 }: {
   title: string;
-  data?: ISolutionData;
+  data?: AllICategory;
   path: string;
 }) => {
   return (
@@ -481,19 +427,19 @@ const HoverDropdown = ({
                 {data?.subArr?.map((item) => (
                   <Link href={item?.path} key={item._id}>
                     <div
-                      className={`flex gap-2 p-4 rounded-md hover:bg-gray-500/5 common-transition ${
+                      className={`flex gap-2 p-4 rounded-md hover:bg-gray-500/5 items-center common-transition ${
                         item?.description ? "items-start" : "items-center"
                       }`}
                     >
                       <span>
-                        <img src={item.icon} alt="icon" className="w-8 h-8" />
+                        <img src={item.icon} alt="icon" className="w-14 h-14" />
                       </span>
                       <p className="flex flex-col gap-1">
                         <span className="font-semibold tracking-wide text-gray-800">
                           {item?.title}
                         </span>
                         {item?.description ? (
-                          <span className="text-sm tracking-wide font-light">
+                          <span className="text-sm tracking-wide font-medium text-primary-text">
                             {item?.description}
                           </span>
                         ) : null}
@@ -526,7 +472,7 @@ const HoverDropdown = ({
                 </>
               ) : (
                 <>
-                  <h6 className="uppercase font-semibold tracking-wider pb-4 border-b border-b-gray-300">
+                  {/* <h6 className="uppercase font-semibold tracking-wider pb-4 border-b border-b-gray-300">
                     Our products
                   </h6>
                   <div className="grid grid-cols-2 gap-4 pt-8">
@@ -573,7 +519,7 @@ const HoverDropdown = ({
                         365 experience
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </>
               )}
             </aside>

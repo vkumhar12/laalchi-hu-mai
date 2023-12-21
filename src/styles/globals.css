@@ -101,7 +101,7 @@ body {
     @apply pt-8 lg:pt-20 2xl:pt-24;
   }
   .shadow-title{
-    @apply text-8xl tracking-widest text-gray-200 font-semibold; 
+    @apply text-8xl tracking-widest text-gray-100 font-semibold; 
   }
   .title {
     @apply text-3xl tracking-tight text-slate-900 sm:text-4xl;
@@ -109,6 +109,7 @@ body {
   .description {
     @apply tracking-wide capitalize text-gray-800;
   }
+  
   .btn-primary {
     @apply bg-primary grid place-items-center text-white tracking-wide capitalize shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] hover:bg-[#164386] transition-all ease-in-out duration-100;
   }

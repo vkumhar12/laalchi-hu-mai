@@ -72,10 +72,10 @@ const SpecialOffer = () => {
     <section className="bg-white z-40">
       <main className=" main-container main-spacing flex flex-col gap-10 pb-10">
         <article className="flex flex-col gap-1 items-center">
-          <div className="w-full text-center">
-            <h2 className="title">
-              Our Hottest
-              <span className=" text-gray-500"> Special Offers</span>{" "}
+          <div className="w-full text-center relative ">
+            <div className="shadow-title ">Special Offer</div>
+            <h2 className="graph-title absolute top-10 bottom-10 right-10 left-10">
+              ---Our Hottest Special Offers---
             </h2>
           </div>
         </article>

@@ -44,7 +44,7 @@ const Search = () => {
         <IoSearch className="" />
       </button>
       {openSearch && (
-        <div className="fixed inset-0 flex justify-center items-center bg-[#120A44] bg-opacity-100 z-9999">
+        <div className="fixed inset-0 flex justify-center items-center !bg-[#120A44] bg-opacity-100 z-9999">
           <div className="p-4 rounded-md w-full flex justify-center items-center">
             <button
               onClick={toggleSearch}
@@ -62,13 +62,13 @@ const Search = () => {
                     value={searchTitle}
                     onChange={(e) => setSearchTitle(e.target.value)}
                     type="search"
-                    className="block outline-none w-full p-4 pl-10 text-sm text-gray-900 border-3 border-blue-500 rounded bg-gray-50"
+                    className="block outline-none w-full p-4 pl-10 text-sm text-gray-900 border-3 border-blue-500 rounded bg-gray-500"
                     placeholder="I am looking for..."
                     required
                   />
                   <button
                     type="submit"
-                    className="text-white capitalize px-5 py-2 border-primary rounded bg-gradient-to-r from-primary to-secondary"
+                    className="text-white capitalize px-5 py-2 border-primary rounded bg-custom-gradient"
                   >
                     Search
                   </button>

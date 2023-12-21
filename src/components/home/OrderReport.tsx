@@ -34,7 +34,7 @@ const OrderReport = () => {
       </div>
       <div className="w-full md:w-3/5 flex flex-col admin-gap">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl tracking-tight text-slate-900 sm:text-4xl text-center">{`1000's of Order Completed & Still Counting`}</h1>
+          <h1 className="graph-title text-4xl text-center">{`1000's of Order Completed & Still Counting`}</h1>
           <p className="description text-center">
             We are your one-top shop for all your branding needs. Our Paltform
             offers printing, desgining, and fulfillment services for your

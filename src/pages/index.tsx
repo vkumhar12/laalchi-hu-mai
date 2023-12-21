@@ -20,17 +20,17 @@ export default function HomePage() {
             <Category />
           </div>
           <div className="top-spacing">
-            <Testimonial />
+            <NewArrivals />
           </div>
         </div>
-        <div className="top-spacing main-container bottom-spacing ">
-          <OrderReport />
-        </div>
-        <div>
+        <div className=" main-container bottom-spacing ">
           <SpecialOffer />
         </div>
-        <div>
-          <NewArrivals />
+        <div className="bottom-spacing">
+          <OrderReport />
+        </div>
+        <div className="bottom-spacing">
+          <Testimonial />
         </div>
       </div>
     </Layout>
