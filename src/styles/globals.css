@@ -70,7 +70,7 @@ body {
     @apply text-primary uppercase text-xl font-medium w-full;
   }
   .graph-title {
-    @apply font-semibold text-primary-text text-lg md:text-2xl;
+    @apply font-semibold text-primary-text text-lg md:text-3xl;
   }
   .delay-animation {
     @apply !transition-all !ease-in-out !duration-500;

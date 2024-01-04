@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { allCategoryArray } from "@/locals/page.local";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function ProductCard() {
   return (
@@ -21,7 +22,9 @@ export default function ProductCard() {
               <img src={item?.imageUrl} alt="" className="" />
               <div className="flex justify-between items-center">
                 <div className="">
-                  <h1 className="text-gray-700 font-medium">{item?.name}</h1>
+                  <Link href="/product-page" target="_blank">
+                    <h1 className="text-gray-700 font-medium">{item?.name}</h1>
+                  </Link>
                   <h1 className="text-primary-text text-xs">
                     {item?.category}
                   </h1>
