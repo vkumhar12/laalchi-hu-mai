@@ -5,8 +5,8 @@ import { BiSolidStar } from "react-icons/bi";
 import { FaStarHalf } from "react-icons/fa6";
 
 export default function ProductPage() {
-  const totalStars = 5;
-  const averageRating = 3.5;
+  //   const totalStars = 5;
+  //   const averageRating = 3.5;
   const availableSizes = [6, 7, 8, 9, 10, 11];
 
   const images = [
@@ -18,7 +18,7 @@ export default function ProductPage() {
   return (
     <Layout title="Products Page">
       <section className="main-container">
-        <div className="top-spacing">
+        <div className="pt-7">
           {/* <div></div> */}
           <div className="flex gap-2 items-center justify-center">
             <div className="w-1/2 flex justify-center items-center">

@@ -8,7 +8,7 @@ export default function ProductCard() {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 admin-gap">
         {allCategoryArray?.map((item, index) => (
-          <div className="flex flex-col gap-2 " key={index}>
+          <div className="flex flex-col gap-2 relative" key={index}>
             <motion.div
               layout
               initial={{ scale: 0, opacity: 0 }}
@@ -17,9 +17,10 @@ export default function ProductCard() {
               exit={{ scale: 0, opacity: 0 }}
               viewport={{ once: true }}
               key={item.id}
-              className="group overflow-hidden cursor-pointer  "
+              className="group overflow-hidden cursor-pointer "
             >
               <img src={item?.imageUrl} alt="" className="" />
+
               <div className="flex justify-between items-center">
                 <div className="">
                   <Link href="/product-page" target="_blank">

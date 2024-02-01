@@ -18,7 +18,6 @@ const ImageDisplay: React.FC<ImageGalleryProps> = ({
 
   return (
     <div className="flex admin-gap">
-      {/* Small Images */}
       <div className="flex flex-col space-y-4">
         {images.map((image, index) => (
           <img

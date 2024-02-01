@@ -301,9 +301,9 @@ const Navbar = () => {
           <aside className="w-[70%] flex justify-between items-center gap-8">
             <Link href="">
               <img
-                src="/logo.png"
+                src="/laalchi_hai_hum_logo.jpg"
                 alt="laalchi-hu-mai-logo"
-                className="w-40 "
+                className="w-40 h-32 "
               />
             </Link>
             <div className="flex items-center gap-8 pl-4">

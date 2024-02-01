@@ -37,7 +37,7 @@ export default function Testimonial() {
           ---What Our Customers Are Saying---
         </h2>
       </div>
-      <div className="grid grid-cols-1 admin-gap  lg:grid-cols-3">
+      <div className="grid grid-cols-1 admin-gap lg:grid-cols-3">
         {shoeReviews?.map((item, index) => (
           <div
             className="hover:border border-pink-blue/20 p-3 flex flex-col admin-gap"
@@ -49,8 +49,8 @@ export default function Testimonial() {
               alt={`Review Image ${index}`}
             />
             <div className="flex flex-col gap-3">
-              <p className="text-sm">{item?.date}</p>
-              <p className="font-light  italic font-gray-800 line-clamp-4 ">
+              <p className="text-sm font-medium">{item?.date}</p>
+              <p className="description line-clamp-4 text-sm ">
                 {item.comments}
               </p>
               <p className="font-semibold text-gray-500">
