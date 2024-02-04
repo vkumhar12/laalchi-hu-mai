@@ -330,7 +330,7 @@ const Navbar = () => {
               </button>
             </Tooltip>
             <Tooltip title="Login">
-              <Link href="">
+              <Link href="/login-page">
                 <button className=" text-secondary text-lg p-2  hover:bg-secondary/10 rounded-md cursor-pointer common-transition">
                   <IoPersonAddOutline />
                 </button>
