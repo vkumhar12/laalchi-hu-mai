@@ -23,7 +23,7 @@ function HeroSlider() {
     <div className="w-full h-screen relative group">
       <Slider {...sliderSettings}>
         {slides.map((item, index) => (
-          <article className=" relative h-fit" key={index}>
+          <article className="relative h-fit" key={index}>
             <img
               src={item.url}
               alt="hero-image"

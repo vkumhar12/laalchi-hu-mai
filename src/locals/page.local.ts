@@ -117,32 +117,62 @@ export const allCategoryArray = [
     price: "12,999",
   },
 ];
+export const relatedProductsArray = [
+  {
+    id: "1",
+    imageUrl: "allcategory5.jpg",
+    name: "Air Jordan 7 Retro",
+    category: "Men Shoes, Nike, Jordan",
+    price: "12,999",
+  },
+  {
+    id: "2",
+    imageUrl: "allcategory2.jpg",
+    name: "Air Jordan 7 Retro",
+    category: "Men Shoes, Nike, Jordan",
+    price: "12,999",
+  },
+  {
+    id: "3",
+    imageUrl: "allcategory7.jpg",
+    name: "Air Jordan 7 Retro",
+    category: "Men Shoes, Nike, Jordan",
+    price: "12,999",
+  },
+  {
+    id: "4",
+    imageUrl: "allcategory8.jpg",
+    name: "Air Jordan 7 Retro",
+    category: "Men Shoes, Nike, Jordan",
+    price: "12,999",
+  },
+];
 
 export const productArray = [
   {
     id: "1",
-    title: "Rakhi Hampers",
+    title: "Womens",
     link: "#",
     image: "/allcategory1.jpg",
     text: "Discover a wide selection of  Products that can be customized with your own logo or design.",
   },
   {
     id: "2",
-    title: "Single Fold Umbrellas",
+    title: "Mens",
     link: "#",
     image: "/allcategory3.jpg",
     text: "Discover a wide selection of  Products that can be customized with your own logo or design.",
   },
   {
     id: "3",
-    title: "Skylark Rain Suite",
+    title: "Kids",
     link: "#",
     image: "/allcategory4.jpg",
     text: "Discover a wide selection of  Products that can be customized with your own logo or design.",
   },
   {
     id: "4",
-    title: "Kiara kids Raincoat",
+    title: "Basketball Shoes",
     link: "#",
     image: "/allcategory2.jpg",
     text: "Discover a wide selection of  Products that can be customized with your own logo or design.",

@@ -50,7 +50,7 @@ export default function Footer() {
   return (
     <div className="grid md:grid-cols-5 grid-cols-1 gap-16 h-[32rem] bg-black text-white">
       <div className="p-8 flex flex-col col-span-2 gap-12">
-        <img src="/footer_logo.avif" alt="" className="w-fit h-fit" />
+        <img src="/footer_logo.avif" alt="" className="w-fit h-14" />
         <div className=" flex admin-gap">
           <div className="flex flex-col gap-6">
             <p className="font-semibold text-2xl whitespace-nowrap">
@@ -113,7 +113,7 @@ export default function Footer() {
               className="text- font-medium text-gray-300 hover:text-lime-300 hover:underline common-transition cursor-pointer"
               key={i}
             >
-              {data?.title}
+              {/* {data?.title} */}
               <Link href={data?.url}>{data?.title}</Link>
             </div>
           ))}

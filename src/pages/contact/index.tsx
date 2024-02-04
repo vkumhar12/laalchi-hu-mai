@@ -3,7 +3,7 @@ import Layout from "@/layout/public";
 export default function ContactPage() {
   return (
     <Layout title="Contact us">
-      <section className="text-gray-600  relative">
+      <section className="text-gray-600  relative bottom-spacing main-container">
         <div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
           <div className="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
             <iframe
@@ -21,8 +21,7 @@ export default function ContactPage() {
                   ADDRESS
                 </h2>
                 <p className="mt-1">
-                  Photo booth tattooed prism, portland taiyaki hoodie neutra
-                  typewriter
+                  460 West 34th Street, 15th floor, New York
                 </p>
               </div>
               <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
@@ -44,7 +43,7 @@ export default function ContactPage() {
               CONTACT US
             </h2>
             <p className="leading-relaxed mb-5 text-gray-600">
-              Post-ironic portland shabby chic echo park, banjo fashion axe
+              Share your review and feedback for our betterment
             </p>
             <div className="relative mb-4">
               <label htmlFor="name" className="leading-7 text-sm text-gray-600">

@@ -301,19 +301,21 @@ const Navbar = () => {
           <aside className="w-[70%] flex justify-between items-center gap-8">
             <Link href="">
               <img
-                src="/laalchi_hai_hum_logo.jpg"
+                src="/main-logo.png"
                 alt="laalchi-hu-mai-logo"
-                className="w-40 h-32 "
+                className="w-full h-14"
               />
             </Link>
-            <div className="flex items-center gap-8 pl-4">
+            <div className="flex items-center cursor-pointer gap-8 pl-4">
               <HoverDropdown title="Category" path="" data={allCategory} />
               {/* <HoverDropdown title="Mens" path="" data={featureData} /> */}
               {/* <ResourceDropdown title="Women" path="" data={resourceData} /> */}
               <div className="font-medium text-lg">Mens</div>
               <div className="font-medium text-lg">Women</div>
               <div className="font-medium text-lg">Testimonal</div>
-              <div className="font-medium text-lg">Contact</div>
+              <Link href="/contact">
+                <div className="font-medium text-lg">Contact</div>
+              </Link>
               {/* <HoverDropdown title="Testimonal" path="" data={aboutData} /> */}
               {/* <HoverDropdown title="Contact" path="/pricing" /> */}
             </div>
@@ -335,7 +337,7 @@ const Navbar = () => {
               </Link>
             </Tooltip>
             <Tooltip title="Cart">
-              <Link href="">
+              <Link href="/add-to-cart">
                 <button className="text-lg text-dark p-2  hover:bg-dark/10 rounded-md cursor-pointer common-transition">
                   <BsCart3 />
                 </button>

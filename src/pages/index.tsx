@@ -11,7 +11,7 @@ import Layout from "@/layout/public";
 export default function HomePage() {
   return (
     <Layout title="Laalchi Hu Mai">
-      <div className="">
+      <div className="flex flex-col admin-gap">
         <div className="main-container w-full">
           <HeroSlider />
         </div>

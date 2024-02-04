@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageDisplay, SizePicker } from "@/core";
 import Layout from "@/layout/public";
+import { relatedProductsArray } from "@/locals/page.local";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import { BiSolidStar } from "react-icons/bi";
 import { FaStarHalf } from "react-icons/fa6";
 
@@ -17,23 +20,13 @@ export default function ProductPage() {
   ];
   return (
     <Layout title="Products Page">
-      <section className="main-container">
+      <section className="main-container top-spacing bottom-spacing">
         <div className="pt-7">
-          {/* <div></div> */}
           <div className="flex gap-2 items-center justify-center">
             <div className="w-1/2 flex justify-center items-center">
-              {/* <img
-                src="/productImg1.webp"
-                alt=""
-                className="h-[35rem] w-[35rem]"
-              /> */}
               <ImageDisplay images={images} />
             </div>
             <div className="flex flex-col admin-gap w-1/2">
-              {/* <StarRatingSetter
-                totalStars={totalStars}
-                averageRating={averageRating}
-              /> */}
               <p className="flex">{renderStars(4.5)}</p>
 
               <div>
@@ -64,8 +57,60 @@ export default function ProductPage() {
                 <div>
                   <SizePicker availableSizes={availableSizes} />
                 </div>
+                <div className="flex gap-5">
+                  <div className="px-10 py-5 rounded w-1/2 text-center font-medium bg-whatsapp text-white cursor-pointer">
+                    Buy now
+                  </div>
+                  <div className="px-10 py-5 rounded w-1/2 text-center font-medium bg-pink-blue text-white cursor-pointer">
+                    Add to Cart
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="main-container bottom-spacing">
+        <div className="flex flex-col admin-gap">
+          <div className="relative flex flex-col admin-gap">
+            <h1 className="text-8xl tracking-widest text-gray-200 font-semibold">
+              Related
+            </h1>
+            <h1 className="graph-title absolute bottom-6 left-2 ">
+              ---Related Products---
+            </h1>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 admin-gap">
+            {relatedProductsArray?.map((item, index) => (
+              <div className="flex flex-col gap-2 relative" key={index}>
+                <motion.div
+                  layout
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: index < 5 ? index * 0.28 : 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  viewport={{ once: true }}
+                  key={item.id}
+                  className="group overflow-hidden cursor-pointer "
+                >
+                  <Link href="/product-page" target="_blank">
+                    <img src={item?.imageUrl} alt="" className="" />
+
+                    <div className="flex justify-between items-center">
+                      <div className="">
+                        <h1 className="text-gray-700 font-medium">
+                          {item?.name}
+                        </h1>
+                        <h1 className="text-primary-text text-xs">
+                          {item?.category}
+                        </h1>
+                      </div>
+                      <div className="font-medium">₹{item?.price}</div>
+                    </div>
+                  </Link>
+                </motion.div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
