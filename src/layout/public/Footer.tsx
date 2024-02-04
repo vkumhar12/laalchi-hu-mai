@@ -1,63 +1,59 @@
 /* eslint-disable @next/next/no-img-element */
 
+import {
+  findStoreArray,
+  footerAddress1Array,
+  footerAddress2Array,
+  productFooterArray,
+} from "@/locals/page.local";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
+// helpTypes.ts
+
+type HelpTopic = {
+  title: string;
+  url: string;
+};
+
+type GetHelpArrayType = HelpTopic;
+
+export const getHelpArray: GetHelpArrayType[] = [
+  {
+    title: "Order Status",
+    url: "/",
+  },
+  {
+    title: "Shipping and Delivery",
+    url: "/",
+  },
+  {
+    title: "Returns",
+    url: "/",
+  },
+  {
+    title: "Payment Options",
+    url: "/",
+  },
+  {
+    title: "Contact Us",
+    url: "/contact",
+  },
+];
 
 export default function Footer() {
-  const footerAddress1Array = [
-    {
-      title: "Email",
-      desc: "support@store.com",
-    },
-    {
-      title: "Phone",
-      desc: " +323 32434 5334",
-    },
-    {
-      title: "Fax",
-      desc: " ++323 32434 5333",
-    },
-  ];
-  const footerAddress2Array = [
-    {
-      title: "Email",
-      desc: "supportEmail@store.com",
-    },
-    {
-      title: "Phone",
-      desc: " +521 1245 0000",
-    },
-    {
-      title: "Fax",
-      desc: " ++320 8888 3333",
-    },
-  ];
-  const findStoreArray = [
-    "COUPON CODE",
-    "SIGNUP FOR EMAIL",
-    "SITE FEEDBACK",
-    "CAREERS",
-  ];
-  const getHelpArray = [
-    "Order Status",
-    "Shipping and Delivery",
-    "Returns",
-    "Payment Options",
-    "Contact us",
-  ];
-  const productArray = [
-    "Shoes",
-    "Sport Shoes",
-    "Chunky Sneakers",
-    "Formal Boots",
-    "Casual Shoes",
-  ];
+  const router = useRouter();
+  const handleItemClick = (url: string) => {
+    router.push(url);
+  };
+
   return (
     <div className="grid md:grid-cols-5 grid-cols-1 gap-16 h-[32rem] bg-black text-white">
       <div className="p-8 flex flex-col col-span-2 gap-12">
         <img src="/footer_logo.avif" alt="" className="w-fit h-fit" />
         <div className=" flex admin-gap">
           <div className="flex flex-col gap-6">
-            <p className="font-medium tracking-wide text-3xl whitespace-nowrap">
+            <p className="font-semibold text-2xl whitespace-nowrap">
               ADDRESS OFFICE 1
             </p>
             <div className="flex flex-col gap-2 text-sm text-gray-300">
@@ -74,7 +70,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex flex-col gap-6">
-            <p className="font-medium tracking-wide text-3xl whitespace-nowrap">
+            <p className="font-semibold text-2xl whitespace-nowrap">
               ADDRESS OFFICE 2
             </p>
             <div className="flex flex-col gap-2 text-sm text-gray-300">
@@ -117,7 +113,8 @@ export default function Footer() {
               className="text- font-medium text-gray-300 hover:text-lime-300 hover:underline common-transition cursor-pointer"
               key={i}
             >
-              <Link href="/">{data}</Link>
+              {data?.title}
+              <Link href={data?.url}>{data?.title}</Link>
             </div>
           ))}
         </div>
@@ -127,7 +124,7 @@ export default function Footer() {
           GET HELP
         </div>
         <div className="flex flex-col gap-4">
-          {productArray?.map((data, i) => (
+          {productFooterArray?.map((data, i) => (
             <div
               className="text- font-medium text-gray-300 hover:text-lime-300 hover:underline common-transition cursor-pointer animate__animated animate__fadeIn animate__faster"
               key={i}
