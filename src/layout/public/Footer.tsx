@@ -18,7 +18,7 @@ type HelpTopic = {
 
 type GetHelpArrayType = HelpTopic;
 
-export const getHelpArray: GetHelpArrayType[] = [
+export const getHelpArray = [
   {
     title: "Order Status",
     url: "/",
@@ -48,7 +48,7 @@ export default function Footer() {
   };
 
   return (
-    <div className="grid md:grid-cols-5 grid-cols-1 gap-16 h-[32rem] bg-black text-white">
+    <div className="grid md:grid-cols-5 grid-cols-1 gap-16 h-[32rem] bg-black text-white p-8">
       <div className="p-8 flex flex-col col-span-2 gap-12">
         <img src="/footer_logo.avif" alt="" className="w-fit h-14" />
         <div className=" flex admin-gap">
@@ -98,7 +98,7 @@ export default function Footer() {
               className="text-gray-300 hover:text-gray-200 font-semibold hover:underline common-transition cursor-pointer"
               key={i}
             >
-              <Link href="/">{data}</Link>
+              {data}
             </div>
           ))}
         </div>
@@ -112,6 +112,7 @@ export default function Footer() {
             <div
               className="text- font-medium text-gray-300 hover:text-lime-300 hover:underline common-transition cursor-pointer"
               key={i}
+              onClick={() => router.push(data?.url)}
             >
               {/* {data?.title} */}
               <Link href={data?.url}>{data?.title}</Link>
