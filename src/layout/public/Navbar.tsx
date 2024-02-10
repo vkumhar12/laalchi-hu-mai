@@ -311,7 +311,9 @@ const Navbar = () => {
               {/* <HoverDropdown title="Mens" path="" data={featureData} /> */}
               {/* <ResourceDropdown title="Women" path="" data={resourceData} /> */}
               <div className="font-medium text-lg">Mens</div>
-              <div className="font-medium text-lg">Women</div>
+              <Link href="/about">
+                <div className="font-medium text-lg">About us</div>
+              </Link>
               <div className="font-medium text-lg">Testimonal</div>
               <Link href="/contact">
                 <div className="font-medium text-lg">Contact</div>
