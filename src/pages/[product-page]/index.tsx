@@ -4,6 +4,7 @@ import Layout from "@/layout/public";
 import { relatedProductsArray } from "@/locals/page.local";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import router, { useRouter } from "next/router";
 import { BiSolidStar } from "react-icons/bi";
 import { FaStarHalf } from "react-icons/fa6";
 
@@ -18,11 +19,12 @@ export default function ProductPage() {
     "allcategory3.jpg",
     "allcategory4.jpg",
   ];
+  const { push } = useRouter();
   return (
     <Layout title="Products Page">
       <section className="main-container top-spacing bottom-spacing">
         <div className="pt-7">
-          <div className="flex gap-2 items-center justify-center">
+          <div className="flex admin-gap items-center justify-center">
             <div className="w-1/2 flex justify-center items-center">
               <ImageDisplay images={images} />
             </div>
@@ -58,10 +60,16 @@ export default function ProductPage() {
                   <SizePicker availableSizes={availableSizes} />
                 </div>
                 <div className="flex gap-5">
-                  <div className="px-10 py-5 rounded w-1/2 text-center font-medium bg-whatsapp text-white cursor-pointer">
+                  <div
+                    className="px-10 py-5 rounded w-1/2 text-center font-medium bg-whatsapp text-white cursor-pointer"
+                    onClick={() => router.push(`add-to-cart`)}
+                  >
                     Buy now
                   </div>
-                  <div className="px-10 py-5 rounded w-1/2 text-center font-medium bg-pink-blue text-white cursor-pointer">
+                  <div
+                    className="px-10 py-5 rounded w-1/2 text-center font-medium bg-pink-blue text-white cursor-pointer"
+                    onClick={() => router.push(`add-to-cart`)}
+                  >
                     Add to Cart
                   </div>
                 </div>

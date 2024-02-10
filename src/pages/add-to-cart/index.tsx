@@ -7,12 +7,12 @@ export default function AddToCart() {
   return (
     <Layout title="Cart">
       <div className="main-container pt-10 bottom-spacing">
-        <h1 className="title">Shopping Cart</h1>
+        <h1 className="graph-title">Shopping Cart</h1>
         <div className="sm:flex shadow-md my-10">
           <div className="w-full sm:w-3/4 bg-gray-800 px-10 py-10">
             <div className="flex justify-between text-white border-b pb-8">
               <h1 className="font-medium text-2xl">Shopping Cart</h1>
-              <h2 className="font-medium text-2xl">3 Items</h2>
+              <h2 className="font-medium text-2xl">2 Items</h2>
             </div>
             <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
               <div className="md:w-4/12 2xl:w-1/4 w-full">
@@ -32,7 +32,7 @@ export default function AddToCart() {
                   </p>
                   <select
                     aria-label="Select quantity"
-                    className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
+                    className="py-1 px-2 rounded border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
                   >
                     <option>01</option>
                     <option>02</option>
@@ -80,7 +80,7 @@ export default function AddToCart() {
                   </p>
                   <select
                     aria-label="Select quantity"
-                    className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
+                    className="py-1 px-2 rounded border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
                   >
                     <option>01</option>
                     <option>02</option>
