@@ -83,9 +83,11 @@ const Navbar = () => {
                   About us
                 </div>
               </Link>
-              <div className="font-medium text-lg hover:underline">
-                Testimonal
-              </div>
+              <Link href="/testimonal">
+                <div className="font-medium text-lg hover:underline">
+                  Testimonal
+                </div>
+              </Link>
               <Link href="/contact">
                 <div className="font-medium text-lg hover:underline">
                   Contact

@@ -48,7 +48,7 @@ export default function Footer() {
   };
 
   return (
-    <div className="grid md:grid-cols-5 grid-cols-1 gap-16 h-[32rem] bg-black text-white p-8">
+    <div className="grid md:grid-cols-5 grid-cols-1 gap-16 h-[30rem] bg-black text-white p-8">
       <div className="p-8 flex flex-col col-span-2 gap-12">
         <img src="/footer_logo.avif" alt="" className="w-fit h-14" />
         <div className=" flex admin-gap">

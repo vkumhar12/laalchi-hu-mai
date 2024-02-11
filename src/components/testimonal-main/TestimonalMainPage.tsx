@@ -3,7 +3,7 @@ import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 /* eslint-disable @next/next/no-img-element */
 
-export default function Testimonial() {
+export default function TestimonalMainPage() {
   const shoeReviews = [
     {
       reviewer: "Lipun Dash",
@@ -32,12 +32,6 @@ export default function Testimonial() {
   ];
   return (
     <div className="flex flex-col admin-gap">
-      <div className="text-center relative">
-        <h1 className="shadow-title">Customer Stories</h1>
-        <h2 className="text-3xl tracking-tight font-medium text-primary-text absolute bottom-10 left-10 right-10 top-10  sm:text-4xl">
-          ---What Our Customers Are Saying---
-        </h2>
-      </div>
       <div className="grid grid-cols-1 admin-gap lg:grid-cols-3">
         {shoeReviews?.map((item, index) => (
           <div

@@ -1,8 +1,10 @@
 import { speacialOfferArray } from "@/locals/page.local";
 import { motion } from "framer-motion";
+import router, { useRouter } from "next/router";
 import Slider from "react-slick";
 
 const SpecialOffer = () => {
+  const { push } = useRouter();
   const settings = {
     arrows: false,
     dots: false,
@@ -84,8 +86,9 @@ const SpecialOffer = () => {
             {speacialOfferArray?.map((item, index) => {
               return (
                 <article
-                  className="mx-auto !flex items-center px-2.5 pb-4"
+                  className="mx-auto !flex items-center px-2.5 pb-4 hover:cursor-pointer"
                   key={item.id}
+                  onClick={() => router.push(`/product-page`)}
                 >
                   <motion.div
                     key={item.id}
