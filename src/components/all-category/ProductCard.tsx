@@ -19,7 +19,9 @@ export default function ProductCard() {
               key={item.id}
               className="group overflow-hidden cursor-pointer "
             >
-              <img src={item?.imageUrl} alt="" className="" />
+              <Link href="/product-page" target="_blank">
+                <img src={item?.imageUrl} alt="" className="" />
+              </Link>
 
               <div className="flex justify-between items-center">
                 <div className="">

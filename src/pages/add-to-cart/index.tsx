@@ -146,15 +146,15 @@ export default function AddToCart() {
               Order Summary
             </h1>
             <div className="flex justify-between mt-10 mb-5">
-              <span className="font-medium text-sm uppercase">Items 3</span>
-              <span className="font-medium text-sm">590$</span>
+              <span className="font-medium text-sm uppercase">Items 2</span>
+              <span className="font-medium text-sm">24,000</span>
             </div>
             <div>
               <label className="font-medium inline-block mb-3 text-sm uppercase">
                 Shipping
               </label>
-              <select className="block p-2 text-gray-600 w-full text-sm">
-                <option>Standard shipping - $10.00</option>
+              <select className="block p-2 text-gray-600 w-full text-sm border">
+                <option>Standard shipping - 100</option>
               </select>
             </div>
             <div className="py-10">
@@ -168,20 +168,25 @@ export default function AddToCart() {
                 type="text"
                 id="promo"
                 placeholder="Enter your code"
-                className="p-2 text-sm w-full"
+                className="p-2 text-sm w-full border-2"
               />
             </div>
-            <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
+            <button
+              className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase rounded"
+              type="submit"
+            >
               Apply
             </button>
             <div className="border-t mt-8">
               <div className="flex font-medium justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
-                <span>$600</span>
+                <span>24,000</span>
               </div>
-              <button className="bg-indigo-500 font-medium hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
-                Checkout
-              </button>
+              <Link href="buy-now">
+                <button className="bg-indigo-500 font-medium rounded hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                  Checkout
+                </button>
+              </Link>
             </div>
           </div>
         </div>
