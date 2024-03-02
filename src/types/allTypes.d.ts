@@ -10,3 +10,7 @@ type GetHelpArrayType = {
   title: string;
   url: string;
 };
+type OptionType = {
+  value: string;
+  label: string;
+};

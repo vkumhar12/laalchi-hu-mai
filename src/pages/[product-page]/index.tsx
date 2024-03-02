@@ -35,6 +35,9 @@ export default function ProductPage() {
                 <h1 className="graph-title">AIR JORDAN 7 RETRO</h1>
                 <p>Jordan, Nike</p>
               </div>
+              <div className="text-2xl font-semibold text-primary-text">
+                ₹ 12,000
+              </div>
               <div className="flex flex-col gap-2">
                 <p className="text-xl font-medium text-primary-text">
                   QUICK OVERVIEW :
@@ -62,7 +65,7 @@ export default function ProductPage() {
                 <div className="flex gap-5">
                   <div
                     className="px-10 py-5 rounded w-1/2 text-center font-medium bg-whatsapp text-white cursor-pointer"
-                    onClick={() => router.push(`add-to-cart`)}
+                    onClick={() => router.push(`buy-now`)}
                   >
                     Buy now
                   </div>
