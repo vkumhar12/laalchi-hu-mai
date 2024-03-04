@@ -147,6 +147,72 @@ export const relatedProductsArray = [
     price: "12,999",
   },
 ];
+export const manageProducts = [
+  {
+    productName: "Product 1",
+    selectProduct: "Category A",
+    mrp: 100,
+    sellingPrice: 80,
+    quantity: 50,
+    productPhoto: "product1.jpg",
+    productDescription: "Description of Product 1",
+  },
+  {
+    productName: "Product 2",
+    selectProduct: "Category B",
+    mrp: 120,
+    sellingPrice: 100,
+    quantity: 30,
+    productPhoto: "product2.jpg",
+    productDescription: "Description of Product 2",
+  },
+  {
+    productName: "Product 3",
+    selectProduct: "Category A",
+    mrp: 150,
+    sellingPrice: 130,
+    quantity: 40,
+    productPhoto: "product3.jpg",
+    productDescription: "Description of Product 3",
+  },
+  {
+    productName: "Product 4",
+    selectProduct: "Category C",
+    mrp: 90,
+    sellingPrice: 70,
+    quantity: 60,
+    productPhoto: "product4.jpg",
+    productDescription: "Description of Product 4",
+  },
+  {
+    productName: "Product 5",
+    selectProduct: "Category B",
+    mrp: 200,
+    sellingPrice: 180,
+    quantity: 20,
+    productPhoto: "product5.jpg",
+    productDescription: "Description of Product 5",
+  },
+  {
+    productName: "Product 6",
+    selectProduct: "Category A",
+    mrp: 80,
+    sellingPrice: 60,
+    quantity: 70,
+    productPhoto: "product6.jpg",
+    productDescription: "Description of Product 6",
+  },
+  {
+    productName: "Product 7",
+    selectProduct: "Category C",
+    mrp: 110,
+    sellingPrice: 90,
+    quantity: 35,
+    productPhoto: "product7.jpg",
+    productDescription: "Description of Product 7",
+  },
+  // Add more products as needed
+];
 
 export const productArray = [
   {

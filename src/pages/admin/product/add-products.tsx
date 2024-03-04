@@ -15,7 +15,7 @@ export default function AddProducts() {
   return (
     <AdminLayout title="Add Products">
       <section className="flex flex-col admin-gap pt-5">
-        <div className="graph-title">Add Products Page is on going</div>
+        <div className="graph-title">Add Products</div>
         <div className="">
           <Formik
             initialValues={addProductSchemaInitialValue}

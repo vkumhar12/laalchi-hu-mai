@@ -4,7 +4,7 @@ import { Field, FieldProps, Form, Formik } from "formik";
 import { Dispatch, SetStateAction } from "react";
 import { IoMdClose } from "react-icons/io";
 import * as Yup from "yup";
-import { userAddressMutation } from "../schema/address.schema";
+import { userAddressMutation } from "../schema/userAddress.schema";
 
 export default function AddUserAddressFrom({
   setUserAddress,
