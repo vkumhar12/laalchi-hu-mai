@@ -1,5 +1,5 @@
+import InputField from "@/components/core/InputField";
 import { addTestimonalMutation } from "@/components/schema/addTestimonal.schema";
-import InputField from "@/core/InputField";
 import AdminLayout from "@/layout/admin";
 import { Field, FieldProps, Form, Formik } from "formik";
 import * as Yup from "yup";

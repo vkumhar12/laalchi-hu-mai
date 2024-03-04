@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import InputField from "@/core/InputField";
+import InputField from "@/components/core/InputField";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";

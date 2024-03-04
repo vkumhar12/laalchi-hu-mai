@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { ImageDisplay, SizePicker } from "@/core";
+import { ImageDisplay, SizePicker } from "@/components/core";
 import Layout from "@/layout/public";
 import { relatedProductsArray } from "@/locals/page.local";
 import { motion } from "framer-motion";

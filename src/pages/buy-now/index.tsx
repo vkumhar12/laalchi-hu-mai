@@ -1,6 +1,6 @@
+import CustomDialog from "@/components/core/CustomDialog";
 import AddUserAddressFrom from "@/components/user/AddUserAddressFrom";
 import ProductPriceDetails from "@/components/user/ProductDetails";
-import CustomDialog from "@/core/CustomDialog";
 import Layout from "@/layout/public";
 import { Tooltip } from "@mui/material";
 import Link from "next/link";

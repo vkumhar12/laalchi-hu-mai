@@ -1,5 +1,5 @@
 import { Product } from "@/components/all-category";
-import { DiscountCheckbox, PriceSlider } from "@/core";
+import { DiscountCheckbox, PriceSlider } from "@/components/core";
 import Layout from "@/layout/public";
 import Link from "next/link";
 

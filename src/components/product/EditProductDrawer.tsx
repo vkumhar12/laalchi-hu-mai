@@ -1,65 +1,36 @@
-import InputField from "@/components/core/InputField";
-import { COUNTRIES, STATES } from "@/utils";
-import { Field, FieldProps, Form, Formik } from "formik";
+import { CustomDrawer } from "@/components/core";
 import { Dispatch, SetStateAction } from "react";
-import { IoMdClose } from "react-icons/io";
-import * as Yup from "yup";
-import { userAddressMutation } from "../schema/userAddress.schema";
 
-export default function AddUserAddressFrom({
-  setUserAddress,
-}: {
-  setUserAddress: Dispatch<SetStateAction<boolean>>;
-}) {
-  let countryOptions: OptionType[] = [];
-  let stateOptions: OptionType[] = [];
+type Props = {
+  openDrawer: boolean;
+  setOpenDrawer: Dispatch<SetStateAction<boolean>>;
+};
 
-  if (COUNTRIES && COUNTRIES?.length > 0)
-    COUNTRIES?.map((curItem) =>
-      countryOptions.push({
-        value: curItem?.code,
-        label: curItem?.label,
-      })
-    );
-  if (STATES && STATES?.length > 0)
-    STATES?.map((curItem) =>
-      stateOptions.push({
-        value: curItem?.code,
-        label: curItem?.name,
-      })
-    );
-  const {
-    userAddressSchema,
-    userAddressSchemaInitialValue,
-    userAddressSchemaValidation,
-  } = userAddressMutation({
-    countryOptions: countryOptions,
-    stateOptions: stateOptions,
-  });
-
-  const handleAddClientDetails = () => {};
+export default function EditProductDrawer({
+  openDrawer,
+  setOpenDrawer,
+}: Props) {
   return (
-    <div>
-      <div className=" w-full flex flex-col gap-5 p-8 ">
-        <div className="flex justify-between items-center ">
-          <p className="text-xl font-semibold text-primary-text ">
-            Add Address :
-          </p>
-          <p
-            className="text-pinterest p-1 rounded-full bg-pinterest/20 text-xl cursor-pointer"
-            onClick={() => setUserAddress(false)}
-          >
-            <IoMdClose />
-          </p>
-        </div>
+    <CustomDrawer
+      open={openDrawer}
+      onClose={() => setOpenDrawer(false)}
+      anchor="right"
+      drawerStyle="w-[75vw] md:w-[25vw] h-screen "
+    >
+      <div>hii</div>
+    </CustomDrawer>
+  );
+}
+{
+  /* <div className="">
         <Formik
-          initialValues={userAddressSchemaInitialValue}
-          validationSchema={Yup.object(userAddressSchemaValidation)}
+          initialValues={editProductSchemaInitialValue}
+          validationSchema={Yup.object(editProductSchemaValidation)}
           onSubmit={handleAddClientDetails}
         >
           {(formik) => (
             <Form className="grid grid-cols-12 gap-4 p-3">
-              {userAddressSchema.map((inputItem) => (
+              {editProductSchema.map((inputItem) => (
                 <Field name={inputItem.name} key={inputItem.key}>
                   {(props: FieldProps<string>) => (
                     <div
@@ -80,11 +51,12 @@ export default function AddUserAddressFrom({
                             key={inputItem?.key}
                             name={inputItem?.name}
                             type={inputItem?.type}
-                            options={inputItem?.options}
+                            multiline={inputItem?.multiLine}
+                            rows={inputItem?.rows}
                             onChange={(e: any) => {
-                              if (inputItem?.name === "mediaFile") {
+                              if (inputItem?.name === "photo") {
                                 formik.setFieldValue(
-                                  "mediaFile",
+                                  "photo",
                                   e?.target?.files[0]
                                 );
                               } else formik.handleChange(e);
@@ -110,15 +82,13 @@ export default function AddUserAddressFrom({
               <div className="col-span-12 pt-4">
                 <button
                   type="submit"
-                  className="!bg-whatsapp text-white p-2 text-xl rounded-md w-full whitespace-nowrap"
+                  className="!bg-pink-blue text-white p-2 text-xl rounded-md w-full whitespace-nowrap"
                 >
-                  Save
+                  Add
                 </button>
               </div>
             </Form>
           )}
         </Formik>
-      </div>
-    </div>
-  );
+      </div> */
 }

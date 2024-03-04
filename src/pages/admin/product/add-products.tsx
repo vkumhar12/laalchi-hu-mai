@@ -1,5 +1,5 @@
+import InputField from "@/components/core/InputField";
 import { addProductMutation } from "@/components/schema/addProducts.schema";
-import InputField from "@/core/InputField";
 import AdminLayout from "@/layout/admin";
 import { Field, FieldProps, Form, Formik } from "formik";
 import * as Yup from "yup";
