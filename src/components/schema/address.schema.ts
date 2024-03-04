@@ -76,7 +76,6 @@ const userAddressMutation = ({
       validationSchema: Yup.string().trim().required("City is Required"),
       placeHolder: "City",
       initialValue: "",
-      options: countryOptions,
       className: " md:col-span-4 col-span-12",
     },
     {

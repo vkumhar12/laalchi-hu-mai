@@ -4,6 +4,7 @@ import CustomDialog from "@/core/CustomDialog";
 import Layout from "@/layout/public";
 import { Tooltip } from "@mui/material";
 import Link from "next/link";
+import router from "next/router";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
@@ -25,6 +26,7 @@ export default function BuyNow() {
         icon: "success",
       }).then(() => {
         setPayment(false);
+        router.push(`order-placed`);
       });
     } else {
       Swal.fire({

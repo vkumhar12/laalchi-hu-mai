@@ -37,25 +37,7 @@ const useAdminMenuItem = () => [
     route: "/admin",
     icon: <RxDashboard className="text-xl" />,
   },
-  // {
-  //   _id: "2",
-  //   title: "Users",
-  //   icon: <HiOutlineUsers className="text-xl" />,
-  //   submenus: [
-  //     {
-  //       _id: "2.1",
-  //       title: "Customers",
-  //       route: "/admin/users/customers",
-  //       icon: <HiOutlineUserGroup className="text-xl" />,
-  //     },
-  //     {
-  //       _id: "2.2",
-  //       title: "B2B Users",
-  //       route: "/admin/users/b2b-users",
-  //       icon: <HiOutlineUserCircle className="text-xl" />,
-  //     },
-  //   ],
-  // },
+
   {
     _id: "2",
     title: "Product",
@@ -64,22 +46,66 @@ const useAdminMenuItem = () => [
       {
         _id: "2.1",
         title: "Add New Product",
-        route: "/admin/products/add-product",
+        route: "/admin/product/add-products",
         icon: <IoAddOutline className="text-xl" />,
       },
       {
         _id: "2.2",
         title: "Manage Products",
-        route: "/admin/products/manage-product",
+        route: "/admin/product",
         icon: <BiBox className="text-xl" />,
       },
     ],
   },
   {
-    _id: "6",
+    _id: "3",
     title: "Orders",
-    route: "/admin",
+    route: "/admin/orders",
     icon: <HiOutlineShoppingBag className="text-xl" />,
+  },
+  {
+    _id: "4",
+    title: "Testimonal",
+    icon: <HiOutlineClipboardDocumentList className="text-xl" />,
+    submenus: [
+      {
+        _id: "4.1",
+        title: "Add Testimonal",
+        route: "/admin/testimonal/add-testimonal",
+        icon: <BiImageAdd className="text-xl" />,
+      },
+      {
+        _id: "4.2",
+        title: "Manage Testimonal",
+        route: "/admin/testimonal",
+        icon: <BiImages className="text-xl" />,
+      },
+    ],
+  },
+  {
+    _id: "5",
+    title: "Contacts",
+    route: "/admin/contacts",
+    icon: <BsChatSquareText className="text-xl" />,
+  },
+  {
+    _id: "6",
+    title: "Home Banner",
+    icon: <BsCardImage className="text-xl" />,
+    submenus: [
+      {
+        _id: "6.1",
+        title: "Add Banner",
+        route: "/admin/banner/add-banner",
+        icon: <BiImageAdd className="text-xl" />,
+      },
+      {
+        _id: "6.2",
+        title: "Manage Banner",
+        route: "/admin/banner",
+        icon: <BiImages className="text-xl" />,
+      },
+    ],
   },
   // {
   //   _id: "3",
@@ -100,18 +126,7 @@ const useAdminMenuItem = () => [
   //   route: "/admin/influencer-request",
   //   icon: <BiUserPlus className="text-xl" />,
   // },
-  {
-    _id: "8",
-    title: "Reports",
-    route: "/admin/reports",
-    icon: <HiOutlineClipboardDocumentList className="text-xl" />,
-  },
-  {
-    _id: "9",
-    title: "Reviews",
-    route: "/admin/reviews",
-    icon: <BsChatSquareText className="text-xl" />,
-  },
+
   {
     _id: "10",
     title: "Support",
@@ -210,25 +225,6 @@ const useAdminMenuItem = () => [
   //   route: "/admin/site-settings/website-settings",
   //   icon: <BsGearWideConnected className="text-xl" />,
   // },
-  {
-    _id: "15",
-    title: "Home Banner",
-    icon: <BsCardImage className="text-xl" />,
-    submenus: [
-      {
-        _id: "15.1",
-        title: "Add Banner",
-        route: "/admin/banner/add-banner",
-        icon: <BiImageAdd className="text-xl" />,
-      },
-      {
-        _id: "15.2",
-        title: "Manage Banner",
-        route: "/admin/banner/manage-banner",
-        icon: <BiImages className="text-xl" />,
-      },
-    ],
-  },
 
   // {
   //   _id: "16",

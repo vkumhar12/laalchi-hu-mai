@@ -24,7 +24,6 @@ const AdminLogin = () => {
       <div className=" bg-slate-50 md:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] lg:w-2/3 w-full md:w-1/2 grid lg:grid-cols-2 rounded-xl md:rounded-3xl p-6 md:p-3 items-center gap-6 md:gap-0">
         <div className="w-full h-fit md:flex items-center rounded-[0.75rem]">
           <div className="flex items-center justify-center w-full h-fit">
-            {/* Replace with your logo */}
             <img src="/main-logo.png" alt="logo" className="w-48 md:w-56" />
           </div>
         </div>

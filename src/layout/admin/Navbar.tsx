@@ -16,7 +16,7 @@ const Navbar = () => {
   const { pathname } = useRouter();
 
   return (
-    <nav className="sticky top-0 z-[90] w-full rounded-md bg-white shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] h-20 flex items-center">
+    <nav className="sticky top-0 z-[90] w-full rounded-md bg-gray-200 h-20 flex items-center">
       <section className="px-6 w-full hidden lg:flex justify-between gap-4">
         <div className="w-3/4 flex items-center justify-between gap-4">
           <h2 className="flex items-center text-lg tracking-wider font-semibold uppercase">

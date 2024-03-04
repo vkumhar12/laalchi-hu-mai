@@ -10,7 +10,7 @@ const Drawer = () => {
   const MenuItems = useAdminMenuItem();
 
   return (
-    <section className="hidden lg:block sticky top-5 left-0 min-w-[15rem] w-60 h-[calc(100vh-40px)] bg-white rounded-3xl shadow-[rgba(0,_98,_90,_0.2)_0px_0px_12px] overflow-hidden">
+    <section className="hidden lg:block sticky top-5 left-0 min-w-[15rem] w-60 h-[calc(100vh-40px)] bg-gray-200 rounded-3xl overflow-hidden">
       {/* Logo section */}
       <div className=" w-full h-full flex flex-col gap-1">
         <div className="grid place-items-center h-24">
@@ -28,7 +28,7 @@ const Drawer = () => {
             <Fragment key={menuItem?._id}>
               {/* Main menu items */}
               <div
-                className={`w-full group flex items-center justify-between px-4 py-3 text-gray-500 hover:text-whatsapp hover:bg-whatsapp/10 transition-all duration-150 ease-in-out cursor-pointer border-l-4 ${
+                className={`w-full group flex items-center justify-between px-4 py-3 text-gray-700 hover:text-whatsapp hover:bg-whatsapp/10 transition-all duration-150 ease-in-out cursor-pointer border-l-4 ${
                   router.asPath === menuItem.route
                     ? "bg-whatsapp/10 text-whatsapp border-whatsapp/75"
                     : "border-transparent"
