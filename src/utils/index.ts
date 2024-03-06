@@ -256,6 +256,12 @@ export const COUNTRIES = [
   { code: "ZM", label: "Zambia", phone: "260" },
   { code: "ZW", label: "Zimbabwe", phone: "263" },
 ];
+export const getFromLocalStorage = (key: any) =>
+  typeof window !== "undefined" ? localStorage.getItem(key) ?? null : null;
+
+export const removeFromLocalStorage = (key: any) => {
+  if (typeof window !== "undefined") localStorage.removeItem(key);
+};
 
 export const STATES = [
   { code: "01", name: "JAMMU AND KASHMIR", state: "JAMMU_AND_KASHMIR" },
