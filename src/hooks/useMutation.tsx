@@ -1,5 +1,4 @@
-import { configs } from "@/config";
-import { getFromLocalStorage } from "@/utils";
+import { BASE_URL, getFromLocalStorage } from "@/utils";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -15,7 +14,8 @@ const useMutation = () => {
   const mutation = async (path: string, options?: MutationOptions) => {
     try {
       const token = getFromLocalStorage("ACCESS_TOKEN");
-      const url = configs.serverUrl;
+      const url = BASE_URL;
+      // const url = configs.serverUrl;
       setIsLoading(true);
       const method = options?.method || "POST";
       const body = options?.body
@@ -34,12 +34,10 @@ const useMutation = () => {
       });
       const status = response.status;
       const results = await response.json();
-      if (options?.isAlert && !results?.success)
-        toast.error(results?.error?.message);
+      if (options?.isAlert && !results?.success) toast.error(results?.msg);
       else if (options?.isAlert && results?.success)
-        toast.success(results?.message);
+        toast.success(results?.msg);
       setIsLoading(false);
-
       return { results, status };
     } catch (error) {
       setIsLoading(false);

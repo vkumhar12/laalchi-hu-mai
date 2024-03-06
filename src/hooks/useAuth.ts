@@ -1,5 +1,4 @@
-import { configs } from "@/config";
-import { getFromLocalStorage, removeFromLocalStorage } from "@/utils";
+import { BASE_URL, getFromLocalStorage, removeFromLocalStorage } from "@/utils";
 import { create } from "zustand";
 
 type AuthState = {
@@ -7,7 +6,7 @@ type AuthState = {
   user?: Partial<any>;
   setUser: (user: Partial<any>) => Promise<void>;
   logout: () => void;
-  getUser: () => Promise<any>;
+  getUser: () => void;
 };
 const useAuth = create<AuthState>((set) => ({
   isUserLoading: true,
@@ -15,61 +14,31 @@ const useAuth = create<AuthState>((set) => ({
   setUser: async (user: Partial<any>) => {
     set({ user: { ...user } });
   },
-  logout: async () => {
+  logout() {
+    set({ user: undefined });
+    typeof window !== "undefined" && removeFromLocalStorage("ACCESS_TOKEN");
+  },
+  getUser: async () => {
     const accessToken = getFromLocalStorage("ACCESS_TOKEN");
-    // console.log(accessToken);
     if (!accessToken) {
       set({ user: {}, isUserLoading: false });
       return;
     }
     try {
-      const res = await fetch(`${configs.serverUrl}/auth/logout`, {
+      const res = await fetch(`${BASE_URL}/users/current/user`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      // console.log(res);
-
-      // if (res?.status !== 200) {
-      //   window?.localStorage?.removeItem("ACCESS_TOKEN");
-      //   set({ user: {}, isUserLoading: false });
-      // } else {
-      //   const data = await res.json();
-      //   const userData = data?.success?.data;
-      //   set({ user: { ...userData }, isUserLoading: false });
-      // }
-    } catch (error) {
-      set({ user: {} });
-    } finally {
-      set({ user: undefined });
-      typeof window !== "undefined" && removeFromLocalStorage("ACCESS_TOKEN");
-    }
-  },
-  getUser: async () => {
-    const accessToken = getFromLocalStorage("ACCESS_TOKEN");
-    // console.log(accessToken, "accessToken");
-
-    if (typeof accessToken !== "string") {
-      return set({ user: {}, isUserLoading: false });
-    }
-    try {
-      const res = await fetch(`${configs.serverUrl}/auth/self`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      // console.log(res?.status, "response");
-
-      if (res?.status !== 200) {
+      if (!res?.status) {
         window?.localStorage?.removeItem("ACCESS_TOKEN");
         set({ user: {}, isUserLoading: false });
-      } else {
+      }
+      if (res?.status) {
         const data = await res.json();
-        // console.log(data, "response");
+        console.log(data);
         const userData = data?.data;
         set({ user: { ...userData }, isUserLoading: false });
       }

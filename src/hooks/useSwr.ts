@@ -1,16 +1,18 @@
-import { configs } from "@/config";
-import { getFromLocalStorage } from "@/utils";
+import { BASE_URL, getFromLocalStorage } from "@/utils";
 import useSWR, { SWRConfiguration } from "swr";
 
 type responseType = {
-  haveNextPage?: boolean;
-  pageNo?: number;
-  perPage?: number;
-  totalCount?: number;
+  pagination: {
+    haveNextPage?: boolean;
+    take?: number;
+    skip?: number;
+    total?: number;
+  };
+  msg?: string;
+  success: boolean;
 };
 
 const useSwr = <T>(url: string | null, options?: SWRConfiguration) => {
-  // console.log({ url });
   const accessToken = getFromLocalStorage("ACCESS_TOKEN");
   const fetcher = async (url: string) => {
     const headers: {
@@ -24,11 +26,11 @@ const useSwr = <T>(url: string | null, options?: SWRConfiguration) => {
       headers,
     });
     const data = await res.json();
-    return data?.data as T & responseType;
+    return data as T & responseType;
   };
-
+  console.log(`${BASE_URL}/${url}`);
   const { data, error, mutate, isValidating } = useSWR<T & responseType>(
-    url ? [`${configs.serverUrl}/${url}`] : null,
+    url ? [`${BASE_URL}/${url}`] : null,
     fetcher,
     {
       ...options,

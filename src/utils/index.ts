@@ -262,6 +262,7 @@ export const getFromLocalStorage = (key: any) =>
 export const removeFromLocalStorage = (key: any) => {
   if (typeof window !== "undefined") localStorage.removeItem(key);
 };
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const STATES = [
   { code: "01", name: "JAMMU AND KASHMIR", state: "JAMMU_AND_KASHMIR" },
