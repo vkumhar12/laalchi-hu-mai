@@ -7,10 +7,8 @@ import {
   BiSupport,
 } from "react-icons/bi";
 import {
-  BsBagCheck,
   BsBagPlus,
   BsCardImage,
-  BsCartCheck,
   BsChatSquareText,
   BsTruck,
 } from "react-icons/bs";
@@ -128,23 +126,10 @@ const useAdminMenuItem = () => [
   // },
 
   {
-    _id: "10",
+    _id: "7",
     title: "Support",
     icon: <BiSupport className="text-xl" />,
-    submenus: [
-      {
-        _id: "10.1",
-        title: "Manage Support",
-        route: "/admin/support/manage-support",
-        icon: <BsCartCheck className="text-xl" />,
-      },
-      {
-        _id: "10.2",
-        title: "Order Support",
-        route: "/admin/support/order-support",
-        icon: <BsBagCheck className="text-xl" />,
-      },
-    ],
+    route: "/admin/all-user",
   },
   {
     _id: "11",

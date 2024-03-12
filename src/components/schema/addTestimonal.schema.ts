@@ -11,7 +11,7 @@ const addTestimonalMutation = () => {
       validationSchema: Yup.string().required("Customer Name is Required"),
       placeHolder: "Customer Name",
       initialValue: "",
-      className: " md:col-span-6 col-span-12",
+      className: "md:col-span-6 col-span-12",
     },
 
     {

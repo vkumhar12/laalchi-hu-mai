@@ -14,3 +14,9 @@ type OptionType = {
   value: string;
   label: string;
 };
+type ResType =
+  | {
+      results: any;
+      status: number;
+    }
+  | undefined;

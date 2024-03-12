@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { EditProductDrawer } from "@/components";
+import { useSwr } from "@/hooks";
+import useAuth from "@/hooks/useAuth";
 import AdminLayout from "@/layout/admin";
 import { manageProducts } from "@/locals/page.local";
 import { useState } from "react";
@@ -9,6 +11,13 @@ import { MdDeleteOutline } from "react-icons/md";
 import Swal from "sweetalert2";
 
 export default function ManageProducts() {
+  const { data } = useSwr<{
+    data: any[];
+  }>(`product?sortBy=ascending`);
+  console.log(data, "All Products");
+
+  const { user } = useAuth();
+  console.log(user, "User Data");
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleDelete = async () => {
     try {

@@ -6,7 +6,7 @@ const loginSchema = [
     key: "1",
     label: "User ID",
     placeholder: "Enter User ID",
-    name: "userId",
+    name: "email",
     type: "text",
     validationSchema: Yup.string().required("User Id is required"),
     required: true,
@@ -44,7 +44,7 @@ const loginValidationSchema: { [key: string]: Yup.StringSchema<string> } =
 
 type loginValueType =
   | {
-      userId: string;
+      email: string;
       password: string;
     }
   | {

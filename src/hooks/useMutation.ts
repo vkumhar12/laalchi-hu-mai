@@ -15,6 +15,7 @@ const useMutation = () => {
     try {
       const token = getFromLocalStorage("ACCESS_TOKEN");
       const url = BASE_URL;
+      console.log(BASE_URL, " Base url");
       // const url = configs.serverUrl;
       setIsLoading(true);
       const method = options?.method || "POST";
@@ -27,7 +28,7 @@ const useMutation = () => {
         ? {}
         : { "Content-Type": "application/json" };
       if (token) headers["Authorization"] = `Bearer ${token}`;
-      const response = await fetch(`${url}/${path}`, {
+      const response = await fetch(`${BASE_URL}/${path}`, {
         method,
         headers,
         body,

@@ -1,103 +1,56 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import LoadingButton from "@/components/core/CustomLoadingButton";
 import InputField from "@/components/core/InputField";
-import { addProductMutation } from "@/components/schema/addProducts.schema";
 import { formikProps } from "@/components/schema/log.schema";
+import { registerUserMutation } from "@/components/schema/register.scehma";
 import { useMutation } from "@/hooks";
-import AdminLayout from "@/layout/admin";
 import errorHelper from "@/utils/error";
 import { Field, FieldProps, Form, Formik } from "formik";
+import router from "next/router";
 import * as Yup from "yup";
 
-export default function AddProducts() {
+export default function register() {
   const {
-    addProductSchema,
-    addProductSchemaInitialValue,
-    addProductSchemaValidation,
-  } = addProductMutation();
+    registerUserchema,
+    registerUserchemaInitialValue,
+    registerUserchemaValidation,
+  } = registerUserMutation();
   const { mutation, isLoading } = useMutation();
-  const handleAddProduct = async (values: any, props: formikProps) => {
+
+  const handleRegisterDetails = async (values: any, props: formikProps) => {
     try {
       let res: ResType;
-      const formData = new FormData();
-      // formData.append("name", values?.name as string);
-      // formData.append("productCode", values?.productCode as string);
-      // formData.append("mrp", values?.mrp as string);
-      // formData.append("sellingPrice", values?.sellingPrice as string);
-      // formData.append("quality", values?.quality as string);
-      // formData.append("color", values?.color as string);
-      // formData.append("photo", values?.photo as string);
-      // formData.append("desc", values?.desc as string);
-
-      res = await mutation(`product`, {
+      res = await mutation(`users/register`, {
         method: "POST",
         isAlert: true,
-        // isFormData: true,
-        // body: formData,
         body: {
           name: values?.name,
-          productCode: values?.productCode,
-          mrp: values?.mrp,
-          sellingPrice: values?.sellingPrice,
-          quality: values?.quality,
-          color: values?.color,
-          desc: values?.desc,
+          password: values?.password,
+          email: values?.email,
         },
       });
-
-      console.log(res);
-
       if (res?.results?.success) {
         props.resetForm();
       }
-    } catch (error) {
-      {
-        errorHelper(error);
-      }
+    } catch (error: unknown) {
+      errorHelper(error);
     }
   };
 
-  // const handleAddProduct = async (values: any, props: formikProps) => {
-  //   try {
-  //     let res: ResType;
-  //     const formData = new FormData();
-  //     formData.append("name", values?.name as string);
-  //     formData.append("productCode", values?.productCode as string);
-  //     formData.append("mrp", values?.mrp as string);
-  //     formData.append("sellingPrice", values?.sellingPrice as string);
-  //     formData.append("quanlity", values?.quanlity as string);
-  //     formData.append("color", values?.color as string);
-  //     // formData.append("photo", values?.photo as string);
-  //     formData.append("desc", values?.desc as string);
-
-  //     res = await mutation(`product`, {
-  //       method: "POST",
-  //       isAlert: true,
-  //       isFormData: true,
-  //       body: formData,
-  //     });
-  //     console.log(res);
-
-  //     if (res?.results?.success) {
-  //       props.resetForm();
-  //     }
-  //   } catch (error) {
-  //     errorHelper(error);
-  //   }
-  // };
-
   return (
-    <AdminLayout title="Add Products">
-      <section className="flex flex-col admin-gap pt-5">
-        <div className="graph-title">Add Products</div>
-        <div className="">
+    <div className="w-full h-screen flex justify-center items-center">
+      <div className=" w-1/3 flex flex-col admin-gap">
+        <div className="graph-title text-center">Create Your Account</div>
+
+        <div className="admin-card">
           <Formik
-            initialValues={addProductSchemaInitialValue}
-            validationSchema={Yup.object(addProductSchemaValidation)}
-            onSubmit={handleAddProduct}
+            initialValues={registerUserchemaInitialValue}
+            validationSchema={Yup.object(registerUserchemaValidation)}
+            onSubmit={handleRegisterDetails}
           >
             {(formik) => (
               <Form className="grid grid-cols-12 gap-4 p-3">
-                {addProductSchema.map((inputItem) => (
+                {registerUserchema.map((inputItem) => (
                   <Field name={inputItem.name} key={inputItem.key}>
                     {(props: FieldProps<string>) => (
                       <div
@@ -118,9 +71,6 @@ export default function AddProducts() {
                               key={inputItem?.key}
                               name={inputItem?.name}
                               type={inputItem?.type}
-                              multiline={inputItem?.multiLine}
-                              rows={inputItem?.rows}
-                              placeholder={inputItem?.placeHolder}
                               onChange={(e: any) => {
                                 if (inputItem?.name === "photo") {
                                   formik.setFieldValue(
@@ -149,7 +99,7 @@ export default function AddProducts() {
                 ))}
                 <div className="flex items-center col-span-12 justify-center flex-col gap-2 pt-2">
                   <LoadingButton
-                    title="Add Product"
+                    title="Register"
                     loading={isLoading}
                     type="submit"
                     className="btn-primary py-3 rounded-md w-full"
@@ -158,8 +108,17 @@ export default function AddProducts() {
               </Form>
             )}
           </Formik>
+          <div>
+            Already have an account?{" "}
+            <span
+              className="font-medium hover:underline text-pink-blue cursor-pointer"
+              onClick={() => router.push(`/login-page`)}
+            >
+              Login here
+            </span>
+          </div>
         </div>
-      </section>
-    </AdminLayout>
+      </div>
+    </div>
   );
 }

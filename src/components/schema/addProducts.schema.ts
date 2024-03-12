@@ -4,7 +4,7 @@ const addProductMutation = () => {
   const addProductSchema = [
     {
       key: "1",
-      name: "productName",
+      name: "name",
       label: "Product Name",
       type: "text",
       required: true,
@@ -16,40 +16,23 @@ const addProductMutation = () => {
 
     {
       key: "2",
-      name: "selectProduct",
-      label: "Select Product",
-      type: "select",
+      name: "productCode",
+      label: "Product Code",
+      type: "text",
       required: true,
       validationSchema: Yup.string()
         .trim()
-        .required("Select Product is Required"),
+        .required("Product Code is Required"),
       placeHolder: "Select Product",
       initialValue: "",
-      options: [
-        {
-          label: "Nike",
-          value: "nike",
-        },
-        {
-          label: "Addidas",
-          value: "addidas",
-        },
-        {
-          label: "Puma",
-          value: "puma",
-        },
-        {
-          label: "Reebook",
-          value: "reebok",
-        },
-      ],
+
       className: " md:col-span-4 col-span-12",
     },
     {
       key: "3",
       name: "mrp",
       label: "MRP",
-      type: "text",
+      type: "number",
       required: true,
       validationSchema: Yup.string().trim().required("MRP is Required"),
       placeHolder: "MRP",
@@ -61,7 +44,7 @@ const addProductMutation = () => {
       key: "4",
       name: "sellingPrice",
       label: "Selling Price",
-      type: "text",
+      type: "number",
       required: true,
       validationSchema: Yup.string()
         .trim()
@@ -73,29 +56,40 @@ const addProductMutation = () => {
     },
     {
       key: "5",
-      name: "quantity",
-      label: "Quantity",
+      name: "quality",
+      label: "Quality",
       type: "text",
       required: true,
-      validationSchema: Yup.string().trim().required("City is Required"),
-      placeHolder: "City",
+      validationSchema: Yup.string().trim().required("Quality is Required"),
+      placeHolder: "Quality",
       initialValue: "",
       className: " md:col-span-4 col-span-12",
     },
     {
       key: "6",
-      name: "photo",
-      label: "Product Photo",
-      type: "file",
+      name: "color",
+      label: "Color",
+      type: "text",
       required: true,
-      validationSchema: Yup.string()
-        .trim()
-        .required("Product Photo is Required"),
-      placeHolder: "Product Photo",
+      validationSchema: Yup.string().trim().required("Color is Required"),
+      placeHolder: "Color",
       initialValue: "",
-
-      className: "md:col-span-4 col-span-12",
+      className: " md:col-span-4 col-span-12",
     },
+    // {
+    //   key: "6",
+    //   name: "photo",
+    //   label: "Product Photo",
+    //   type: "file",
+    //   required: true,
+    //   validationSchema: Yup.string()
+    //     .trim()
+    //     .required("Product Photo is Required"),
+    //   placeHolder: "Product Photo",
+    //   initialValue: "",
+
+    //   className: "md:col-span-4 col-span-12",
+    // },
     {
       key: "7",
       name: "desc",
@@ -107,7 +101,7 @@ const addProductMutation = () => {
       validationSchema: Yup.string()
         .trim()
         .required("Product Description is Required"),
-      placeHolder: "Pincode",
+      placeHolder: "Product Description",
       initialValue: "",
       className: "col-span-12",
     },
