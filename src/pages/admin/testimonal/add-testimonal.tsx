@@ -1,6 +1,10 @@
+import LoadingButton from "@/components/core/CustomLoadingButton";
 import InputField from "@/components/core/InputField";
 import { addTestimonalMutation } from "@/components/schema/addTestimonal.schema";
+import { formikProps } from "@/components/schema/log.schema";
+import { useMutation } from "@/hooks";
 import AdminLayout from "@/layout/admin";
+import errorHelper from "@/utils/error";
 import { Field, FieldProps, Form, Formik } from "formik";
 import * as Yup from "yup";
 
@@ -10,7 +14,36 @@ export default function AddProducts() {
     addTestimonalSchemaInitialValue,
     addTestimonalSchemaValidation,
   } = addTestimonalMutation();
-  const handleAddClientDetails = () => {};
+  const { mutation, isLoading } = useMutation();
+
+  const handleAddTestimonal = async (values: any, props: formikProps) => {
+    try {
+      let res: ResType;
+      const formData = new FormData();
+      formData.append("title", values?.title as string);
+      formData.append("rating", values?.rating as string);
+      formData.append("desc", values?.desc as string);
+      formData.append("productCode", values?.productCode as string);
+      // formData.append("photo", values?.photo as string);
+
+      res = await mutation(`testimonial`, {
+        method: "POST",
+        isAlert: true,
+        // isFormData: true,
+        body: {
+          title: values?.title,
+          desc: values?.desc,
+          rating: values?.rating,
+        },
+      });
+      console.log(res);
+      if (res?.results?.success) {
+        props.resetForm();
+      }
+    } catch (error) {
+      errorHelper(error);
+    }
+  };
 
   return (
     <AdminLayout title="Add Testimonal">
@@ -20,7 +53,7 @@ export default function AddProducts() {
           <Formik
             initialValues={addTestimonalSchemaInitialValue}
             validationSchema={Yup.object(addTestimonalSchemaValidation)}
-            onSubmit={handleAddClientDetails}
+            onSubmit={handleAddTestimonal}
           >
             {(formik) => (
               <Form className="grid grid-cols-12 gap-4 p-3">
@@ -74,12 +107,12 @@ export default function AddProducts() {
                   </Field>
                 ))}
                 <div className="col-span-12 pt-4">
-                  <button
+                  <LoadingButton
+                    title="Add"
+                    loading={isLoading}
                     type="submit"
-                    className="!bg-pink-blue text-white p-2 text-xl rounded-md w-full whitespace-nowrap"
-                  >
-                    Add
-                  </button>
+                    className="btn-primary py-3 rounded-md w-full"
+                  />
                 </div>
               </Form>
             )}

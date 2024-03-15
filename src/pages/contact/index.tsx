@@ -1,6 +1,37 @@
+import LoadingButton from "@/components/core/CustomLoadingButton";
+import InputField from "@/components/core/InputField";
+import { contactMutation } from "@/components/schema/contact.schema";
+import { formikProps } from "@/components/schema/log.schema";
+import { useMutation } from "@/hooks";
 import Layout from "@/layout/public";
+import errorHelper from "@/utils/error";
+import { Field, FieldProps, Form, Formik } from "formik";
+import * as Yup from "yup";
 
 export default function ContactPage() {
+  const { contactSchema, contactSchemaInitialValue, contactSchemaValidation } =
+    contactMutation();
+  const { mutation, isLoading } = useMutation();
+
+  const handleSubmitContact = async (values: any, props: formikProps) => {
+    try {
+      let res: ResType;
+      res = await mutation(`contact`, {
+        method: "POST",
+        isAlert: true,
+        body: {
+          title: values?.title,
+          message: values?.message,
+        },
+      });
+      if (res?.results?.success) {
+        props.resetForm();
+      }
+      // console.log(res);
+    } catch (error) {
+      errorHelper(error);
+    }
+  };
   return (
     <Layout title="Contact us">
       <section className="text-gray-600  relative bottom-spacing main-container">
@@ -45,47 +76,80 @@ export default function ContactPage() {
             <p className="leading-relaxed mb-5 text-gray-600">
               Share your review and feedback for our betterment
             </p>
-            <div className="relative mb-4">
-              <label htmlFor="name" className="leading-7 text-sm text-gray-600">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div className="relative mb-4">
-              <label
-                htmlFor="email"
-                className="leading-7 text-sm text-gray-600"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div className="relative mb-4">
-              <label
-                htmlFor="message"
-                className="leading-7 text-sm text-gray-600"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-              ></textarea>
-            </div>
-            <button className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-              Button
-            </button>
+            <section className="flex flex-col admin-gap pt-5">
+              <div className="">
+                <Formik
+                  initialValues={contactSchemaInitialValue}
+                  validationSchema={Yup.object(contactSchemaValidation)}
+                  onSubmit={handleSubmitContact}
+                >
+                  {(formik) => (
+                    <Form className="grid grid-cols-12 gap-4 p-3">
+                      {contactSchema.map((inputItem) => (
+                        <Field name={inputItem.name} key={inputItem.key}>
+                          {(props: FieldProps<string>) => (
+                            <div
+                              className={`flex w-full flex-col justify-center  ${inputItem?.className}`}
+                            >
+                              <div
+                                className={`font-medium text-sm  ${
+                                  inputItem?.key
+                                    ? "text-dark/60"
+                                    : "text-secondary"
+                                }`}
+                              >
+                                {inputItem.label}{" "}
+                                <span>{inputItem?.required ? "*" : ""}</span>
+                              </div>
+                              {inputItem?.key ? (
+                                <div className="relative">
+                                  <InputField
+                                    fullWidth
+                                    key={inputItem?.key}
+                                    name={inputItem?.name}
+                                    type={inputItem?.type}
+                                    multiline={inputItem?.multiline}
+                                    rows={inputItem?.rows}
+                                    placeholder={inputItem?.placeHolder}
+                                    onChange={(e: any) => {
+                                      if (inputItem?.name === "photo") {
+                                        formik.setFieldValue(
+                                          "photo",
+                                          e?.target?.files[0]
+                                        );
+                                      } else formik.handleChange(e);
+                                    }}
+                                    onBlur={formik.handleBlur}
+                                  />
+                                  <p className="absolute -bottom-5 text-youtube/80 text-sm">
+                                    {Boolean(
+                                      formik?.touched[inputItem?.name] &&
+                                        formik?.errors[inputItem?.name]
+                                    )}
+                                    {formik?.touched[inputItem?.name] &&
+                                      formik?.errors[inputItem?.name]}
+                                  </p>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          )}
+                        </Field>
+                      ))}
+                      <div className="flex items-center col-span-12 justify-center flex-col gap-2 pt-2">
+                        <LoadingButton
+                          title="Send"
+                          loading={isLoading}
+                          type="submit"
+                          className="btn-primary py-3 rounded-md w-full"
+                        />
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
+            </section>
             <p className="text-xs text-gray-500 mt-3">
               Chicharrones blog helvetica normcore iceland tousled brook viral
               artisan.

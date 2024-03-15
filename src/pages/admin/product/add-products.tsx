@@ -14,6 +14,7 @@ export default function AddProducts() {
     addProductSchemaInitialValue,
     addProductSchemaValidation,
   } = addProductMutation();
+
   const { mutation, isLoading } = useMutation();
   const handleAddProduct = async (values: any, props: formikProps) => {
     try {
@@ -44,7 +45,7 @@ export default function AddProducts() {
         },
       });
 
-      console.log(res);
+      // console.log(res);
 
       if (res?.results?.success) {
         props.resetForm();
@@ -55,35 +56,6 @@ export default function AddProducts() {
       }
     }
   };
-
-  // const handleAddProduct = async (values: any, props: formikProps) => {
-  //   try {
-  //     let res: ResType;
-  //     const formData = new FormData();
-  //     formData.append("name", values?.name as string);
-  //     formData.append("productCode", values?.productCode as string);
-  //     formData.append("mrp", values?.mrp as string);
-  //     formData.append("sellingPrice", values?.sellingPrice as string);
-  //     formData.append("quanlity", values?.quanlity as string);
-  //     formData.append("color", values?.color as string);
-  //     // formData.append("photo", values?.photo as string);
-  //     formData.append("desc", values?.desc as string);
-
-  //     res = await mutation(`product`, {
-  //       method: "POST",
-  //       isAlert: true,
-  //       isFormData: true,
-  //       body: formData,
-  //     });
-  //     console.log(res);
-
-  //     if (res?.results?.success) {
-  //       props.resetForm();
-  //     }
-  //   } catch (error) {
-  //     errorHelper(error);
-  //   }
-  // };
 
   return (
     <AdminLayout title="Add Products">

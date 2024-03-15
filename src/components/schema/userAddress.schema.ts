@@ -10,18 +10,7 @@ const userAddressMutation = ({
   const userAddressSchema = [
     {
       key: "1",
-      name: "firstName",
-      label: "First Name",
-      type: "text",
-      required: true,
-      validationSchema: Yup.string().required("First Name is Required"),
-      placeHolder: "First Name",
-      initialValue: "",
-      className: " md:col-span-4 col-span-12",
-    },
-    {
-      key: "2",
-      name: "phoneNumber",
+      name: "phone",
       label: "Phone Number",
       type: "number",
       required: true,
@@ -33,26 +22,39 @@ const userAddressMutation = ({
       className: " md:col-span-4 col-span-12",
     },
     {
+      key: "2",
+      name: "alternatePhone",
+      label: "Alternative Number",
+      type: "number",
+      required: true,
+      validationSchema: Yup.string()
+        .trim()
+        .required("Alternative Number is Required"),
+      placeHolder: "Alternative Number",
+      initialValue: "",
+      className: " md:col-span-4 col-span-12",
+    },
+    {
       key: "3",
-      name: "address",
-      label: "Address",
+      name: "houseNo",
+      label: "House No.",
       type: "text",
       required: true,
-      validationSchema: Yup.string().trim().required("Address is Required"),
-      placeHolder: "Address",
+      validationSchema: Yup.string().trim().required("House No. is Required"),
+      placeHolder: "House No.",
       initialValue: "",
       className: " md:col-span-4 col-span-12",
     },
     {
       key: "4",
-      name: "country",
-      label: "Country",
-      type: "select",
+      name: "street",
+      label: "Street",
+      type: "text",
       required: true,
-      validationSchema: Yup.string().trim().required("Country is Required"),
-      placeHolder: "Country",
+      validationSchema: Yup.string().trim().required("Street is Required"),
+      placeHolder: "Street",
       initialValue: "",
-      options: countryOptions,
+      // options: countryOptions,
       className: " md:col-span-4 col-span-12",
     },
     {
@@ -80,7 +82,7 @@ const userAddressMutation = ({
     },
     {
       key: "7",
-      name: "pincode",
+      name: "pinCode",
       label: "Pincode",
       type: "number",
       required: true,
@@ -91,29 +93,14 @@ const userAddressMutation = ({
     },
     {
       key: "8",
-      name: "addressType",
-      label: "Address Type",
-      type: "select",
+      name: "landmark",
+      label: "Land Mark",
+      type: "text",
       required: true,
-      validationSchema: Yup.string()
-        .trim()
-        .required("Address Type is Required"),
-      placeHolder: "Address Type",
+      validationSchema: Yup.string().trim().required("Land Mark is Required"),
+      placeHolder: "Land Mark",
       initialValue: "",
-      options: [
-        {
-          value: "work",
-          label: "Work",
-        },
-        {
-          value: "home",
-          label: "Home",
-        },
-        {
-          value: "other",
-          label: "Other.",
-        },
-      ],
+
       className: " md:col-span-4 col-span-12",
     },
   ];

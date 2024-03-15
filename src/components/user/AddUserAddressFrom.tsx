@@ -1,9 +1,13 @@
 import InputField from "@/components/core/InputField";
+import { useMutation } from "@/hooks";
 import { COUNTRIES, STATES } from "@/utils";
+import errorHelper from "@/utils/error";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { Dispatch, SetStateAction } from "react";
 import { IoMdClose } from "react-icons/io";
 import * as Yup from "yup";
+import LoadingButton from "../core/CustomLoadingButton";
+import { formikProps } from "../schema/log.schema";
 import { userAddressMutation } from "../schema/userAddress.schema";
 
 export default function AddUserAddressFrom({
@@ -13,6 +17,8 @@ export default function AddUserAddressFrom({
 }) {
   let countryOptions: OptionType[] = [];
   let stateOptions: OptionType[] = [];
+
+  const { mutation, isLoading } = useMutation();
 
   if (COUNTRIES && COUNTRIES?.length > 0)
     COUNTRIES?.map((curItem) =>
@@ -37,7 +43,34 @@ export default function AddUserAddressFrom({
     stateOptions: stateOptions,
   });
 
-  const handleAddClientDetails = () => {};
+  const handleSubmitAddressDetails = async (
+    values: any,
+    props: formikProps
+  ) => {
+    try {
+      let res: ResType;
+      res = await mutation(`address/`, {
+        method: "POST",
+        isAlert: true,
+        body: {
+          phone: values?.phone,
+          alternatePhone: values?.alternatePhone,
+          state: values?.state,
+          city: values?.city,
+          pinCode: values?.pinCode,
+          houseNo: values?.houseNo,
+          street: values?.street,
+          landmark: values?.landmark,
+        },
+      });
+      if (res?.results?.success) {
+        props.resetForm();
+        setUserAddress(false);
+      }
+    } catch (error) {
+      errorHelper(error);
+    }
+  };
   return (
     <div>
       <div className=" w-full flex flex-col gap-5 p-8 ">
@@ -55,7 +88,7 @@ export default function AddUserAddressFrom({
         <Formik
           initialValues={userAddressSchemaInitialValue}
           validationSchema={Yup.object(userAddressSchemaValidation)}
-          onSubmit={handleAddClientDetails}
+          onSubmit={handleSubmitAddressDetails}
         >
           {(formik) => (
             <Form className="grid grid-cols-12 gap-4 p-3">
@@ -108,12 +141,18 @@ export default function AddUserAddressFrom({
                 </Field>
               ))}
               <div className="col-span-12 pt-4">
-                <button
+                <LoadingButton
+                  title="Save"
+                  loading={isLoading}
+                  type="submit"
+                  className="btn-primary py-3 rounded-md w-full"
+                />
+                {/* <button
                   type="submit"
                   className="!bg-whatsapp text-white p-2 text-xl rounded-md w-full whitespace-nowrap"
                 >
                   Save
-                </button>
+                </button> */}
               </div>
             </Form>
           )}

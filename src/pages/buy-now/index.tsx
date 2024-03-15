@@ -1,12 +1,16 @@
+/* eslint-disable @next/next/no-img-element */
 import CustomDialog from "@/components/core/CustomDialog";
 import AddUserAddressFrom from "@/components/user/AddUserAddressFrom";
 import ProductPriceDetails from "@/components/user/ProductDetails";
+import { useMutation, useSwr } from "@/hooks";
+import useAuth from "@/hooks/useAuth";
 import Layout from "@/layout/public";
+import { sweetAlertCustomStyles, sweetAlertStyles } from "@/utils";
+import errorHelper from "@/utils/error";
 import { Tooltip } from "@mui/material";
 import Link from "next/link";
 import router from "next/router";
 import { useState } from "react";
-import { CiEdit } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa6";
 import { MdDeleteOutline } from "react-icons/md";
@@ -36,6 +40,41 @@ export default function BuyNow() {
       });
     }
   };
+
+  const { mutation, isLoading } = useMutation();
+  const { user } = useAuth();
+  console.log(user, "User Data");
+
+  const { data } = useSwr(`address`);
+  console.log(data, "Address GET");
+
+  const handleDeleteAddress = (id: string) => {
+    try {
+      Swal.fire({
+        title: "Warning..!",
+        text: "Are you sure you want to delete the Product?",
+        icon: "warning",
+        iconColor: "#FF4D49",
+        confirmButtonColor: "#FF4D49",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        showCancelButton: true,
+        customClass: sweetAlertStyles,
+        backdrop: sweetAlertCustomStyles,
+      }).then(async (result) => {
+        if (result?.isConfirmed) {
+          const res = await mutation(`address/${id}`, {
+            method: "DELETE",
+            isAlert: true,
+          });
+          // mutate();
+        }
+      });
+    } catch (error) {
+      errorHelper(error);
+    }
+  };
+
   return (
     <Layout title="CheckOut">
       <>
@@ -81,13 +120,11 @@ export default function BuyNow() {
                             Odisha
                           </p>
                           <p className="flex">
-                            <Tooltip title="Edit">
-                              <p className="p-2 rounded-bl-2xl bg-pink-blue text-white cursor-pointer  ">
-                                <CiEdit className="text-xl" />
-                              </p>
-                            </Tooltip>
                             <Tooltip title="Delete">
-                              <p className="p-2 rounded-tr-2xl bg-youtube text-white cursor-pointer ">
+                              <p
+                                className="p-2 rounded bg-youtube text-white cursor-pointer "
+                                // onClick={handleDeleteAddress}
+                              >
                                 <MdDeleteOutline className="text-xl" />
                               </p>
                             </Tooltip>

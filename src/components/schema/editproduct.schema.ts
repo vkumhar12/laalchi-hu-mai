@@ -1,49 +1,32 @@
 import * as Yup from "yup";
 
-const editProductMutation = () => {
+const editProductMutation = ({ productData }: { productData: any }) => {
   const editProductSchema = [
     {
       key: "1",
-      name: "productName",
+      name: "name",
       label: "Product Name",
       type: "text",
       required: true,
       validationSchema: Yup.string().required("Product Name is Required"),
       placeHolder: "Product Name",
-      initialValue: "",
+      initialValue: productData?.name ? productData?.name : "",
       className: "  col-span-12",
     },
 
     {
       key: "2",
-      name: "selectProduct",
-      label: "Select Product",
-      type: "select",
+      name: "productCode",
+      label: "Product Code",
+      type: "text",
       required: true,
       validationSchema: Yup.string()
         .trim()
-        .required("Select Product is Required"),
-      placeHolder: "Select Product",
-      initialValue: "",
-      options: [
-        {
-          label: "Nike",
-          value: "nike",
-        },
-        {
-          label: "Addidas",
-          value: "addidas",
-        },
-        {
-          label: "Puma",
-          value: "puma",
-        },
-        {
-          label: "Reebook",
-          value: "reebok",
-        },
-      ],
-      className: "  col-span-12",
+        .required("Product Code is Required"),
+      placeHolder: "Product Code",
+      initialValue: productData?.productCode ? productData?.productCode : "",
+
+      className: "col-span-12",
     },
     {
       key: "3",
@@ -53,7 +36,7 @@ const editProductMutation = () => {
       required: true,
       validationSchema: Yup.string().trim().required("MRP is Required"),
       placeHolder: "MRP",
-      initialValue: "",
+      initialValue: productData?.mrp ? productData?.mrp : "",
       //   options: countryOptions,
       className: "  col-span-12",
     },
@@ -61,41 +44,52 @@ const editProductMutation = () => {
       key: "4",
       name: "sellingPrice",
       label: "Selling Price",
-      type: "text",
+      type: "number",
       required: true,
       validationSchema: Yup.string()
         .trim()
         .required("Selling Price is Required"),
       placeHolder: "Selling Price",
-      initialValue: "",
+      initialValue: productData?.sellingPrice ? productData?.sellingPrice : "",
       //   options: stateOptions,
       className: "  col-span-12",
     },
     {
       key: "5",
-      name: "quantity",
-      label: "Quantity",
+      name: "quality",
+      label: "Quality",
       type: "text",
       required: true,
-      validationSchema: Yup.string().trim().required("City is Required"),
-      placeHolder: "City",
-      initialValue: "",
-      className: "  col-span-12",
+      validationSchema: Yup.string().trim().required("Quality is Required"),
+      placeHolder: "Quality",
+      initialValue: productData?.quality ? productData?.quality : "",
+      className: "col-span-12",
     },
     {
       key: "6",
-      name: "photo",
-      label: "Product Photo",
-      type: "file",
+      name: "color",
+      label: "Color",
+      type: "text",
       required: true,
-      validationSchema: Yup.string()
-        .trim()
-        .required("Product Photo is Required"),
-      placeHolder: "Product Photo",
-      initialValue: "",
-
-      className: " col-span-12",
+      validationSchema: Yup.string().trim().required("Color is Required"),
+      placeHolder: "Color",
+      initialValue: productData?.color ? productData?.color : " ",
+      className: "col-span-12",
     },
+    // {
+    //   key: "6",
+    //   name: "photo",
+    //   label: "Product Photo",
+    //   type: "file",
+    //   required: true,
+    //   validationSchema: Yup.string()
+    //     .trim()
+    //     .required("Product Photo is Required"),
+    //   placeHolder: "Product Photo",
+    //   initialValue:  "",
+
+    //   className: " col-span-12",
+    // },
     {
       key: "7",
       name: "desc",
@@ -107,8 +101,8 @@ const editProductMutation = () => {
       validationSchema: Yup.string()
         .trim()
         .required("Product Description is Required"),
-      placeHolder: "Pincode",
-      initialValue: "",
+      placeHolder: "Product Description",
+      initialValue: productData?.desc ? productData?.desc : "",
       className: "col-span-12",
     },
   ];

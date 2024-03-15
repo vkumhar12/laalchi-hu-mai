@@ -269,6 +269,29 @@ export const saveToLocalStorage = (key: string, value: string) => {
 };
 export const BASE_URL = `http://localhost:8000/api/v1`;
 
+export const sweetAlertStyles = {
+  container: "...",
+  popup: "swal-container",
+  title: "swal-title",
+  closeButton: "...",
+  icon: "...",
+  image: "...",
+  htmlContainer: "...",
+  input: "...",
+  inputLabel: "...",
+  validationMessage: "...",
+  actions: "...",
+  confirmButton: `swal-confirm-button`,
+  denyButton: "...",
+  cancelButton: `swal-cancel-button`,
+  loader: "...",
+  footer: "...",
+  timerProgressBar: "...",
+};
+
+export const sweetAlertCustomStyles =
+  "rgba(76, 78, 100, 0.2) 0px 6px 6px -3px, rgba(76, 78, 100, 0.14) 0px 10px 14px 1px, rgba(76, 78, 100, 0.12) 0px 4px 18px 3px;";
+
 export const STATES = [
   { code: "01", name: "JAMMU AND KASHMIR", state: "JAMMU_AND_KASHMIR" },
   { code: "02", name: "HIMACHAL PRADESH", state: "HIMACHAL_PRADESH" },

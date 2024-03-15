@@ -76,22 +76,22 @@ const addProductMutation = () => {
       initialValue: "",
       className: " md:col-span-4 col-span-12",
     },
-    // {
-    //   key: "6",
-    //   name: "photo",
-    //   label: "Product Photo",
-    //   type: "file",
-    //   required: true,
-    //   validationSchema: Yup.string()
-    //     .trim()
-    //     .required("Product Photo is Required"),
-    //   placeHolder: "Product Photo",
-    //   initialValue: "",
-
-    //   className: "md:col-span-4 col-span-12",
-    // },
     {
       key: "7",
+      name: "photo",
+      label: "Product Photo",
+      type: "file",
+      required: true,
+      validationSchema: Yup.string()
+        .trim()
+        .required("Product Photo is Required"),
+      placeHolder: "Product Photo",
+      initialValue: "",
+
+      className: "md:col-span-4 col-span-12",
+    },
+    {
+      key: "8",
       name: "desc",
       label: "Product Description",
       type: "text",
