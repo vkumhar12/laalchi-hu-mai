@@ -45,8 +45,8 @@ export default function BuyNow() {
   const { user } = useAuth();
   console.log(user, "User Data");
 
-  const { data } = useSwr<{ data: any[] }>(`address$`);
-  console.log(data?.data?.[0]?._id);
+  const { data } = useSwr<{ data: any[] }>(`address`);
+  console.log(data?.data);
   console.log(data, "Address GET");
 
   const handleDeleteAddress = (id: string) => {
@@ -95,20 +95,20 @@ export default function BuyNow() {
                   <div className="text-xl font-semibold text-primary-text">
                     DELIVERY ADDRESS
                   </div>
-                  <p
+                  <div
                     className={`text-xl cursor-pointer `}
                     onClick={() => setAddress((prevState) => !prevState)}
                   >
                     {isAddress ? (
-                      <div className="rotate-180 bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
+                      <p className="rotate-180 bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
                         <FaAngleDown />
-                      </div>
+                      </p>
                     ) : (
-                      <div className="bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
+                      <p className="bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
                         <FaAngleDown />
-                      </div>
+                      </p>
                     )}
-                  </p>
+                  </div>
                 </div>
                 {isAddress && (
                   <>
@@ -131,12 +131,12 @@ export default function BuyNow() {
                             </Tooltip>
                           </p>
                         </div>
-                        <p className="flex gap-1 items-center font-medium">
+                        <div className="flex gap-1 items-center font-medium">
                           <span>
                             <FaPhoneAlt />
                           </span>
                           <span>1203256488</span>
-                        </p>
+                        </div>
                         <p>Work</p>
                       </div>
                     </div>
@@ -153,20 +153,20 @@ export default function BuyNow() {
                   <div className="text-xl font-semibold text-primary-text">
                     ORDER SUMMARY
                   </div>
-                  <p
+                  <div
                     className={`text-xl cursor-pointer `}
                     onClick={() => setIsSummary((prevState) => !prevState)}
                   >
                     {isSummary ? (
-                      <div className="rotate-180 bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
+                      <p className="rotate-180 bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
                         <FaAngleDown />
-                      </div>
+                      </p>
                     ) : (
-                      <div className="bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
+                      <p className="bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
                         <FaAngleDown />
-                      </div>
+                      </p>
                     )}
-                  </p>
+                  </div>
                 </div>
                 {isSummary && (
                   <div className="admin-card flex flex-col gap-4">
@@ -207,20 +207,20 @@ export default function BuyNow() {
                   <div className="text-xl font-semibold text-primary-text">
                     PAYMENT
                   </div>
-                  <p
+                  <div
                     className={`text-xl cursor-pointer `}
                     onClick={() => setPayment((prevState) => !prevState)}
                   >
                     {isPayment ? (
-                      <div className="rotate-180 bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
+                      <p className="rotate-180 bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
                         <FaAngleDown />
-                      </div>
+                      </p>
                     ) : (
-                      <div className="bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
+                      <p className="bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
                         <FaAngleDown />
-                      </div>
+                      </p>
                     )}
-                  </p>
+                  </div>
                 </div>
                 {isPayment && (
                   <div className="flex flex-col gap-2 admin-card">

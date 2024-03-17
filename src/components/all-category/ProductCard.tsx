@@ -1,13 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import { allCategoryArray } from "@/locals/page.local";
+import { useSwr } from "@/hooks";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function ProductCard() {
+  const { data } = useSwr<{ data: any[] }>(`product`);
+  // console.log(data);
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 admin-gap">
-        {allCategoryArray?.map((item, index) => (
+        {data?.data?.slice(0, 7)?.map((item, index) => (
           <div className="flex flex-col gap-2 relative" key={index}>
             <motion.div
               layout
@@ -19,8 +21,12 @@ export default function ProductCard() {
               key={item.id}
               className="group overflow-hidden cursor-pointer "
             >
-              <Link href="/product-page" target="_blank">
-                <img src={item?.imageUrl} alt="" className="" />
+              <Link href="/product" target="_blank">
+                {item?.url ? (
+                  <img src={item?.imageUrl} alt="" />
+                ) : (
+                  <img src="/allcategory4.jpg" alt="" className="" />
+                )}
               </Link>
 
               <div className="flex justify-between items-center">
@@ -28,11 +34,9 @@ export default function ProductCard() {
                   <Link href="/product-page" target="_blank">
                     <h1 className="text-gray-700 font-medium">{item?.name}</h1>
                   </Link>
-                  <h1 className="text-primary-text text-xs">
-                    {item?.category}
-                  </h1>
+                  <h1 className="text-primary-text text-xs">{item?.quality}</h1>
                 </div>
-                <div className="font-medium">₹{item?.price}</div>
+                <div className="font-medium">₹{item?.sellingPrice}</div>
               </div>
             </motion.div>
           </div>

@@ -29,7 +29,7 @@ export default function ProductPage() {
               <ImageDisplay images={images} />
             </div>
             <div className="flex flex-col admin-gap w-1/2">
-              <p className="flex">{renderStars(4.5)}</p>
+              <p className="flex ">{renderStars(4.5)}</p>
 
               <div>
                 <h1 className="graph-title">AIR JORDAN 7 RETRO</h1>
@@ -129,7 +129,7 @@ export default function ProductPage() {
   );
 }
 
-const renderStars = (rating: number) => {
+export const renderStars = (rating: any) => {
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 !== 0;
 

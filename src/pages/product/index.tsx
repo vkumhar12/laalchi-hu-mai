@@ -42,7 +42,6 @@ export default function Products() {
           </div>
           <div className="w-4/5">
             <Product />
-            <Product />
           </div>
         </div>
       </section>
