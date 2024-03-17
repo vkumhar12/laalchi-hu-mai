@@ -1,13 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
 import useAdminMenuItem from "@/hooks/useAdminMenuItem";
+import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
+import Swal from "sweetalert2";
 const Drawer = () => {
   const [selectedSubMenu, setSelectedSubMenu] = useState("");
   const router = useRouter();
   const MenuItems = useAdminMenuItem();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout();
+        router.push(`/`);
+      }
+    });
+  };
 
   return (
     <section className="hidden lg:block sticky top-5 left-0 min-w-[15rem] w-60 h-[calc(100vh-40px)] bg-gray-200 rounded-3xl overflow-hidden">
@@ -98,7 +118,7 @@ const Drawer = () => {
           <div
             className={`w-full group flex items-center justify-between text-gray-500 hover:text-whatsapp px-5 py-3 hover:bg-whatsapp/10 common-transition cursor-pointer`}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" onClick={handleLogout}>
               <span className="group-hover:text-whatsapp">
                 <BiLogOutCircle className="text-xl" />
               </span>

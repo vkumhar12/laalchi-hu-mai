@@ -61,7 +61,7 @@ const userAddressMutation = ({
       key: "5",
       name: "state",
       label: "State",
-      type: "select",
+      type: "test",
       required: true,
       validationSchema: Yup.string().trim().required("State is Required"),
       placeHolder: "State",

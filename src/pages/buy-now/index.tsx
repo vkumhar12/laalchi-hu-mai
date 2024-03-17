@@ -45,7 +45,8 @@ export default function BuyNow() {
   const { user } = useAuth();
   console.log(user, "User Data");
 
-  const { data } = useSwr(`address`);
+  const { data } = useSwr<{ data: any[] }>(`address$`);
+  console.log(data?.data?.[0]?._id);
   console.log(data, "Address GET");
 
   const handleDeleteAddress = (id: string) => {

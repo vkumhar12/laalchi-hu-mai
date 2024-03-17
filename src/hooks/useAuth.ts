@@ -73,10 +73,11 @@ const useAuth = create<AuthState>((set) => ({
     // console.log(accessToken);
     if (!accessToken) {
       set({ user: {}, isUserLoading: false });
+
       return;
     }
     try {
-      const res = await fetch(`${BASE_URL}/auth/logout`, {
+      const res = await fetch(`${BASE_URL}/users/logout`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

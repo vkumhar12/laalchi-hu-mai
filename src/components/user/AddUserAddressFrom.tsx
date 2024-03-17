@@ -49,17 +49,17 @@ export default function AddUserAddressFrom({
   ) => {
     try {
       let res: ResType;
-      res = await mutation(`address/`, {
+      res = await mutation(`address`, {
         method: "POST",
         isAlert: true,
         body: {
           phone: values?.phone,
           alternatePhone: values?.alternatePhone,
+          houseNo: values?.houseNo,
+          street: values?.street,
           state: values?.state,
           city: values?.city,
           pinCode: values?.pinCode,
-          houseNo: values?.houseNo,
-          street: values?.street,
           landmark: values?.landmark,
         },
       });
