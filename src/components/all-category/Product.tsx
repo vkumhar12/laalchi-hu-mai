@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Product() {
   const { data } = useSwr<{ data: any[] }>(`product`);
-  console.log(data);
+  console.log(data?.data?.[1]?._id);
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 admin-gap">
@@ -21,7 +21,7 @@ export default function Product() {
               key={item.id}
               className="group overflow-hidden cursor-pointer "
             >
-              <Link href="/product-page" target="_blank">
+              <Link href={`${item?._id}`} target="_blank">
                 {item?.url ? (
                   <img src={item?.imageUrl} alt="" />
                 ) : (

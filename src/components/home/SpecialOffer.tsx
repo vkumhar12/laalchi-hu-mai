@@ -1,10 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
+import { useSwr } from "@/hooks";
 import { speacialOfferArray } from "@/locals/page.local";
 import { motion } from "framer-motion";
-import router, { useRouter } from "next/router";
+import router from "next/router";
 import Slider from "react-slick";
 
 const SpecialOffer = () => {
-  const { push } = useRouter();
+  const { data } = useSwr<{ data: any[] }>(`product`);
+
   const settings = {
     arrows: false,
     dots: false,
@@ -81,14 +84,14 @@ const SpecialOffer = () => {
             </h2>
           </div>
         </article>
-        <article className="w-full category-slick-slider industry-slider ">
+        <article className="w-full">
           <Slider {...settings}>
             {speacialOfferArray?.map((item, index) => {
               return (
                 <article
                   className="mx-auto !flex items-center px-2.5 pb-4 hover:cursor-pointer"
                   key={item.id}
-                  onClick={() => router.push(`/product-page`)}
+                  onClick={() => router.push(`/product`)}
                 >
                   <motion.div
                     key={item.id}

@@ -1,11 +1,12 @@
 import { productArray } from "@/locals/page.local";
+import router from "next/router";
 import Slider from "react-slick";
 import { NewArrivalCard } from ".";
 const NewArrivals = () => {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     speed: 250,
     cssEase: "linear",
@@ -63,7 +64,7 @@ const NewArrivals = () => {
 
   return (
     <section className="bg-white">
-      <main className=" main-container main-spacing pb-16 flex flex-col">
+      <main className=" main-container main-spacing pb-16 flex flex-col ">
         <article className="flex flex-col relative gap-1 items-center">
           <div className="shadow-title ">New Arrivals</div>
           <div className="w-full text-center absolute top-10 left-10 right-10 bottom-10">
@@ -75,8 +76,9 @@ const NewArrivals = () => {
           <Slider {...settings}>
             {productArray.map((curElm: NEWARRIVALPROPS, index: number) => (
               <article
-                className="mx-auto !flex items-center px-2 pb-4"
+                className="mx-auto !flex items-center px-2 pb-4 cursor-pointer"
                 key={curElm.id}
+                onClick={() => router.push(`product`)}
               >
                 <NewArrivalCard item={curElm} index={index} />
               </article>

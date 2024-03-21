@@ -17,32 +17,25 @@ export default function AddProducts() {
 
   const { mutation, isLoading } = useMutation();
   const handleAddProduct = async (values: any, props: formikProps) => {
+    // console.log(values);
+    // return;
     try {
       let res: ResType;
       const formData = new FormData();
-      // formData.append("name", values?.name as string);
-      // formData.append("productCode", values?.productCode as string);
-      // formData.append("mrp", values?.mrp as string);
-      // formData.append("sellingPrice", values?.sellingPrice as string);
-      // formData.append("quality", values?.quality as string);
-      // formData.append("color", values?.color as string);
-      // formData.append("photo", values?.photo as string);
-      // formData.append("desc", values?.desc as string);
+      formData.append("name", values?.name as string);
+      formData.append("productCode", values?.productCode as string);
+      formData.append("mrp", values?.mrp as string);
+      formData.append("sellingPrice", values?.sellingPrice as string);
+      formData.append("quality", values?.quality as string);
+      formData.append("color", values?.color as string);
+      formData.append("productImage", values?.productImage as string);
+      formData.append("desc", values?.desc as string);
 
       res = await mutation(`product`, {
         method: "POST",
         isAlert: true,
-        // isFormData: true,
-        // body: formData,
-        body: {
-          name: values?.name,
-          productCode: values?.productCode,
-          mrp: values?.mrp,
-          sellingPrice: values?.sellingPrice,
-          quality: values?.quality,
-          color: values?.color,
-          desc: values?.desc,
-        },
+        isFormData: true,
+        body: formData,
       });
 
       // console.log(res);
@@ -94,9 +87,9 @@ export default function AddProducts() {
                               rows={inputItem?.rows}
                               placeholder={inputItem?.placeHolder}
                               onChange={(e: any) => {
-                                if (inputItem?.name === "photo") {
+                                if (inputItem?.name === "productImage") {
                                   formik.setFieldValue(
-                                    "photo",
+                                    "productImage",
                                     e?.target?.files[0]
                                   );
                                 } else formik.handleChange(e);

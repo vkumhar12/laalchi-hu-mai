@@ -78,7 +78,7 @@ const addProductMutation = () => {
     },
     {
       key: "7",
-      name: "photo",
+      name: "productImage",
       label: "Product Photo",
       type: "file",
       required: true,

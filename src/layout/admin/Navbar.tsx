@@ -1,4 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import useAdminMenuItem from "@/hooks/useAdminMenuItem";
+import useAuth from "@/hooks/useAuth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { AiOutlineUser } from "react-icons/ai";
@@ -14,6 +16,8 @@ import {
 const Navbar = () => {
   const MenuItems = useAdminMenuItem();
   const { pathname } = useRouter();
+  const { user } = useAuth();
+  // console.log(user);
 
   return (
     <nav className="sticky top-0 z-[90] w-full rounded-md bg-gray-200 h-20 flex items-center">
@@ -74,10 +78,10 @@ const Navbar = () => {
             </p>
             <section className="absolute top-full right-0 w-72 scale-0 origin-top-right pt-2 bg-white text-primary rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] z-10 group-hover:scale-100 transition-all duration-200 ease-in-out">
               <aside className="flex flex-col items-center gap-3 px-3 pb-2">
-                <img src="/sara ahmed.jpg" alt="" />
+                <img src="/man.png" alt="" className="w-16 h-16" />
                 <div className="flex flex-col">
-                  <p>Your Name</p>
-                  <p className="text-sm">useremail@gmail.com</p>
+                  <p>{user?.name}</p>
+                  <p className="text-sm">{user?.email}</p>
                 </div>
               </aside>
               <div className="flex flex-col py-2">

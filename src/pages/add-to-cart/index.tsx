@@ -1,6 +1,37 @@
+import { useMutation, useSwr } from "@/hooks";
 import Layout from "@/layout/public";
+import { sweetAlertCustomStyles, sweetAlertStyles } from "@/utils";
+import errorHelper from "@/utils/error";
 import Link from "next/link";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import Swal from "sweetalert2";
+
+interface ProductDetails {
+  _id: string;
+  name: string;
+  productCode: string;
+  quality: string;
+  color: string;
+  desc: string;
+  mrp: number;
+  sellingPrice: number;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface CartItem {
+  quantity: number;
+  subTotal: number;
+  productDetails: ProductDetails[];
+}
+
+interface CartResponse {
+  success: boolean;
+  message: string;
+  cartItems: CartItem[];
+}
 
 /* eslint-disable @next/next/no-img-element */
 export default function AddToCart() {
@@ -22,6 +53,62 @@ export default function AddToCart() {
       price: "10,000",
     },
   ];
+
+  const { data, mutate } = useSwr<{ data: CartResponse }>(`cart`);
+
+  const { mutation } = useMutation();
+
+  console.log(data, "Toatal");
+
+  const handleDeleteProductFromCart = (id: string) => {
+    try {
+      Swal.fire({
+        title: "Warning..!",
+        text: "Are you sure you want to delete the Product?",
+        icon: "warning",
+        iconColor: "#FF4D49",
+        confirmButtonColor: "#FF4D49",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        showCancelButton: true,
+        customClass: sweetAlertStyles,
+        backdrop: sweetAlertCustomStyles,
+      }).then(async (result) => {
+        if (result?.isConfirmed) {
+          const res = await mutation(`cart/${id}`, {
+            method: "DELETE",
+            isAlert: true,
+          });
+          mutate();
+        }
+      });
+    } catch (error) {
+      errorHelper(error);
+    }
+  };
+  const handleIncQuatity = async (id: string) => {
+    try {
+      await mutation(`cart/inc/${id}`, {
+        method: "PUT",
+        isAlert: true,
+      });
+      mutate();
+    } catch (error) {
+      errorHelper(error);
+    }
+  };
+  const handleDescQuatity = async (id: string) => {
+    try {
+      await mutation(`cart/dec/${id}`, {
+        method: "PUT",
+        isAlert: true,
+      });
+      mutate();
+    } catch (error) {
+      errorHelper(error);
+    }
+  };
+
   return (
     <Layout title="Cart">
       <div className="main-container pt-10 bottom-spacing">
@@ -30,109 +117,100 @@ export default function AddToCart() {
           <div className="w-full sm:w-3/4 bg-gray-800 px-10 py-10">
             <div className="flex justify-between text-white border-b pb-8">
               <h1 className="font-medium text-2xl">Shopping Cart</h1>
-              <h2 className="font-medium text-2xl">2 Items</h2>
+              <h2 className="font-medium text-2xl">
+                {data?.cartItems?.[0]?.cartItems.length} Items
+              </h2>
             </div>
-            {cartArray?.map((data, i) => (
-              <div
-                className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50"
-                key={i}
-              >
-                <div className="md:w-4/12 2xl:w-1/4 w-full">
-                  <img
-                    src={data?.imageUrl}
-                    alt="Sneaker"
-                    className="h-full object-center object-cover md:block hidden"
-                  />
-                </div>
-                <div className="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-                  <p className="text-xs leading-3 text-gray-800 dark:text-white md:pt-0 pt-4">
-                    {data?.productCode}
-                  </p>
-                  <div className="flex items-center justify-between w-full">
-                    <p className="text-base font-medium leading-none text-gray-800 dark:text-white">
-                      {data?.productName}
-                    </p>
-                    <select
-                      aria-label="Select quantity"
-                      className="py-1 px-2 rounded border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
-                    >
-                      <option>01</option>
-                      <option>02</option>
-                      <option>03</option>
-                    </select>
-                  </div>
-
-                  <p className="text-xs leading-3 text-gray-600 dark:text-white py-4">
-                    Color:{data?.color}
-                  </p>
-                  <p className="w-96 text-xs leading-3 text-gray-600 dark:text-white">
-                    Description: {data?.desc}
-                  </p>
-                  <div className="flex items-center justify-between pt-5">
-                    <div className="flex item s-center">
-                      <p className="text-xs leading-3 underline text-gray-800 dark:text-white cursor-pointer">
-                        Add to favorites
-                      </p>
-                      <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">
-                        Remove
-                      </p>
-                    </div>
-                    <p className="text-base font-black leading-none text-gray-800 dark:text-white">
-                      {data?.price}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            {/* <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
-              <div className="md:w-4/12 2xl:w-1/4 w-full">
-                <img
-                  src="allcategory8.jpg"
-                  alt="Black Leather Purse"
-                  className="h-full object-center object-cover md:block hidden"
-                />
-              </div>
-              <div className="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-                <p className="text-xs leading-3 text-gray-800 dark:text-white md:pt-0 pt-4">
-                  RF293
-                </p>
-                <div className="flex items-center justify-between w-full">
-                  <p className="text-base font-medium leading-none text-gray-800 dark:text-white">
-                    Air Jordan Retro 7
-                  </p>
-                  <select
-                    aria-label="Select quantity"
-                    className="py-1 px-2 rounded border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
+            {data?.cartItems?.map((item: any) =>
+              item?.cartItems?.map(
+                (item: any, i: number) => (
+                  // item?.productDetails?.map((data: any, i: number) => (
+                  <div
+                    className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50"
+                    key={i}
                   >
-                    <option>01</option>
-                    <option>02</option>
-                    <option>03</option>
-                  </select>
-                </div>
+                    {item?.productDetails?.imageUrl ? (
+                      <div className="md:w-4/12 2xl:w-1/4 w-full">
+                        <img
+                          src={item?.productDetails?.imageUrl}
+                          alt="Sneaker"
+                          className="h-full object-center object-cover md:block hidden"
+                        />
+                      </div>
+                    ) : (
+                      <div className="md:w-4/12 2xl:w-1/4 w-full">
+                        <img
+                          src="allcategory1.jpg"
+                          alt="Sneaker"
+                          className="h-full object-center object-cover md:block hidden"
+                        />
+                      </div>
+                    )}
+                    <div className="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
+                      <p className="text-xs leading-3 text-gray-800 dark:text-white md:pt-0 pt-4">
+                        {item?.productDetails?.productCode}
+                      </p>
+                      <div className="flex items-center justify-between w-full">
+                        <p className="text-base font-medium leading-none text-gray-800 dark:text-white">
+                          {item?.productDetails?.[0]?.name}
+                        </p>
+                        <div className="flex gap-2 border p-1 rounded-md">
+                          <button
+                            className="text-white"
+                            onClick={() =>
+                              handleDescQuatity(item?.productDetails?.[0]?._id)
+                            }
+                          >
+                            -
+                          </button>
+                          <span className="text-black bg-white px-3 py-1 rounded-md">
+                            {item?.quantity}
+                          </span>
+                          <button
+                            className="text-white"
+                            onClick={() =>
+                              handleIncQuatity(item?.productDetails?.[0]?._id)
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
 
-                <p className="text-xs leading-3 text-gray-600 dark:text-white py-4">
-                  Color: Black
-                </p>
-                <p className="w-96 text-xs leading-3 text-gray-600 dark:text-white">
-                  Composition: 100% calf leather
-                </p>
-                <div className="flex items-center justify-between pt-5">
-                  <div className="flex itemms-center">
-                    <p className="text-xs leading-3 underline text-gray-800 dark:text-white cursor-pointer">
-                      Add to favorites
-                    </p>
-                    <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">
-                      Remove
-                    </p>
+                      <p className="text-xs leading-3 text-gray-600 dark:text-white py-4">
+                        Color : {item?.productDetails?.[0]?.color}
+                      </p>
+                      <p className="w-96 text-xs leading-3 text-gray-600 dark:text-white">
+                        Description : {item?.productDetails?.[0]?.desc}
+                      </p>
+                      <div className="flex items-center justify-between pt-5">
+                        <div className="flex item s-center">
+                          <p className="text-xs leading-3 underline text-gray-800 dark:text-white cursor-pointer">
+                            Add to favorites
+                          </p>
+                          <p
+                            className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
+                            onClick={() =>
+                              handleDeleteProductFromCart(
+                                item?.productDetails?.[0]?._id
+                              )
+                            }
+                          >
+                            Remove
+                          </p>
+                        </div>
+                        <p className="text-base font-black leading-none text-gray-800 dark:text-white">
+                          ₹{item?.productDetails?.[0]?.sellingPrice}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-base font-black leading-none text-gray-800 dark:text-white">
-                    7,000
-                  </p>
-                </div>
-              </div>
-            </div> */}
-            <Link href="#">
+                )
+                // ))
+              )
+            )}
+
+            <Link href="/">
               <div className="flex gap-1 items-center font-medium">
                 <p className="text-pink-blue">
                   <FaArrowLeftLong />
@@ -147,7 +225,11 @@ export default function AddToCart() {
             </h1>
             <div className="flex justify-between mt-10 mb-5">
               <span className="font-medium text-sm uppercase">Items 2</span>
-              <span className="font-medium text-sm">24,000</span>
+              <span className="font-medium text-sm">
+                {data?.cartItems?.[0]?.total
+                  ? `₹${data?.cartItems?.[0]?.total}`
+                  : "0"}
+              </span>
             </div>
             <div>
               <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -180,7 +262,7 @@ export default function AddToCart() {
             <div className="border-t mt-8">
               <div className="flex font-medium justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
-                <span>24,000</span>
+                <span>₹{data?.cartItems?.[0]?.total}</span>
               </div>
               <Link href="buy-now">
                 <button className="bg-indigo-500 font-medium rounded hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">

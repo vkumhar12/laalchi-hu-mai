@@ -7,7 +7,7 @@ import Layout from "@/layout/public";
 import Link from "next/link";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import Slider from "react-slick";
-import { renderStars } from "../[product-page]";
+import { renderStars } from "../[productId]";
 
 export default function Testimonal() {
   const { data } = useSwr<{ data: any[] }>(`testimonial`);

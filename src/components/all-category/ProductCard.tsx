@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function ProductCard() {
   const { data } = useSwr<{ data: any[] }>(`product`);
-  // console.log(data);
+  console.log(data?.data);
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 admin-gap">

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { getUser, user, setUser } = useAuth();
+  const { getUser } = useAuth();
   const { asPath } = useRouter();
   useEffect(() => {
     (() => {

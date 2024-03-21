@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
+import { useSwr } from "@/hooks";
 import Layout from "@/layout/public";
 import { motion } from "framer-motion";
 
 export default function OrderPlaced() {
+  const { data } = useSwr<{ data: any[] }>(`address`);
   const orderStatuses = [
     {
       id: "1",

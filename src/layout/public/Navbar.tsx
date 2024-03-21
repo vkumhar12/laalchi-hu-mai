@@ -1,19 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
+import useAuth from "@/hooks/useAuth";
 import useScrollPosition from "@/hooks/useScrollPosition";
 import Tooltip from "@mui/material/Tooltip";
 import Link from "next/link";
+import router from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BsCart3 } from "react-icons/bs";
-import { FaRegHeart, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
+import { IoIosLogOut } from "react-icons/io";
 import { IoPersonAddOutline, IoSearchOutline } from "react-icons/io5";
+import { MdOutlinePerson } from "react-icons/md";
 import ResponsiveNavbar from "./ResponsiveNavbar";
 // import ResponsiveNavbar from "./ResponsiveNavbar";
 
 const Navbar = () => {
   const [searchTitle, setSearchTitle] = useState("");
   const [openSearch, setOpenSearch] = useState(false);
+  const [subMenu, setSubMenu] = useState(false);
   const mainDivRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -46,12 +51,9 @@ const Navbar = () => {
     setOpenSearch(!openSearch);
   };
 
-  const [keyword, setKeyword] = useState<string>("");
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(event.target.value);
-  };
   const scrollPosition = useScrollPosition();
+  const { user, logout } = useAuth();
+  // console.log(user, "Login user");
 
   return (
     <header className="w-full sticky z-[999] top-0">
@@ -104,13 +106,28 @@ const Navbar = () => {
                 <IoSearchOutline className="text-lg " />
               </button>
             </Tooltip>
-            <Tooltip title="Login">
-              <Link href="/login-page">
-                <button className=" text-secondary text-lg p-2  hover:bg-secondary/10 rounded-md cursor-pointer common-transition">
-                  <IoPersonAddOutline />
+            {user?.accessToken ? (
+              <Tooltip title="Logout">
+                <button
+                  className=" text-pinterest text-lg p-1 hover:bg-pinterest/10 rounded-md cursor-pointer common-transition"
+                  onClick={() => {
+                    logout();
+                    router.push(`/login-page`);
+                  }}
+                >
+                  <IoIosLogOut className="text-xl" />
                 </button>
-              </Link>
-            </Tooltip>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Login">
+                <Link href="/login-page">
+                  <button className=" text-secondary text-lg p-2  hover:bg-secondary/10 rounded-md cursor-pointer common-transition">
+                    <IoPersonAddOutline />
+                  </button>
+                </Link>
+              </Tooltip>
+            )}
+
             <Tooltip title="Cart">
               <Link href="/add-to-cart">
                 <button className="text-lg text-dark p-2  hover:bg-dark/10 rounded-md cursor-pointer common-transition">
@@ -118,13 +135,20 @@ const Navbar = () => {
                 </button>
               </Link>
             </Tooltip>
-            <Tooltip title="Wishlist">
+            <Tooltip title="Profile">
+              <Link href="/profile">
+                <button className="text-lg text-pinterest/80 p-2  hover:bg-pinterest/10 rounded-md cursor-pointer common-transition">
+                  <MdOutlinePerson />
+                </button>
+              </Link>
+            </Tooltip>
+            {/* <Tooltip title="Wishlist">
               <Link href="">
                 <button className="text-lg text-pinterest/80 p-2  hover:bg-pinterest/10 rounded-md cursor-pointer common-transition">
                   <FaRegHeart />
                 </button>
               </Link>
-            </Tooltip>
+            </Tooltip> */}
           </aside>
         </section>
         <ResponsiveNavbar />

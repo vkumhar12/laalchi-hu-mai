@@ -1,20 +1,24 @@
+import { useSwr } from "@/hooks";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const ProductPriceDetails = () => {
   const [couponOpen, setCouponOpen] = useState(false);
+  const { data, mutate } = useSwr<{ data: any }>(`cart`);
+
   return (
     <div className="w-full h-full flex flex-col gap-10 pb-5 admin-card">
       <div className="flex flex-col gap-5 border-b-2 border-dashed pb-5">
         <p className=" w-full justify-between flex items-center px-5  text-gray-500">
-          <span>{`Price (1 Items)`}</span>
-          <span>₹12,999</span>
+          <span>{`Price ${data?.cartItems?.[0]?.cartItems.length} Items`}</span>
+          <span>
+            {data?.cartItems?.[0]?.total
+              ? `₹${data?.cartItems?.[0]?.total}`
+              : "0"}
+          </span>
         </p>
-        <p className=" w-full justify-between flex items-center px-5 text-[1rem] font-semibold text-green-600">
-          <span>You Save</span>
-          <span>₹12,999.00</span>
-        </p>
+
         <p className=" w-full justify-between flex items-center px-5  text-gray-500">
           <span>Delivery Charges</span>
           <span>₹79</span>
@@ -57,7 +61,7 @@ const ProductPriceDetails = () => {
         )}
       </div>
 
-      <div className=" w-full justify-between flex items-center px-5  text-gray-500">
+      {/* <div className=" w-full justify-between flex items-center px-5  text-gray-500">
         <p className="flex flex-col">
           <span className="text-gray-800">Wallet Balance</span>
           <span className=" text-blue-700">20:00</span>
@@ -69,11 +73,11 @@ const ProductPriceDetails = () => {
             Apply
           </span>
         </span>
-      </div>
+      </div> */}
 
       <p className=" w-full justify-between flex items-center px-5 text-lg font-semibold text-gray-800">
         <span>Total Amount</span>
-        <span>₹13,068</span>
+        <span>{data?.cartItems?.[0]?.total}</span>
       </p>
     </div>
   );

@@ -268,6 +268,13 @@ export const saveToLocalStorage = (key: string, value: string) => {
   }
 };
 export const BASE_URL = `http://localhost:8000/api/v1`;
+export const getRandomColor = (a: number) => {
+  const getRandomChannelValue = () => Math.floor(Math.random() * 216);
+  const r = getRandomChannelValue();
+  const g = getRandomChannelValue();
+  const b = getRandomChannelValue();
+  return `rgba(${r}, ${g}, ${b}, ${a})`;
+};
 
 export const sweetAlertStyles = {
   container: "...",

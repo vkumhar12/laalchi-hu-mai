@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import CustomDialog from "@/components/core/CustomDialog";
+import AddToCart from "@/components/product/AddToCart";
 import AddUserAddressFrom from "@/components/user/AddUserAddressFrom";
 import ProductPriceDetails from "@/components/user/ProductDetails";
 import { useMutation, useSwr } from "@/hooks";
-import useAuth from "@/hooks/useAuth";
 import Layout from "@/layout/public";
 import { sweetAlertCustomStyles, sweetAlertStyles } from "@/utils";
 import errorHelper from "@/utils/error";
@@ -18,36 +18,51 @@ import Swal from "sweetalert2";
 
 export default function BuyNow() {
   const [isAddress, setAddress] = useState(false);
-  const [isSummary, setIsSummary] = useState(false);
+  // const [isSummary, setIsSummary] = useState(false);
   const [isPayment, setPayment] = useState(false);
   const [userAddress, setUserAddress] = useState(false);
   const [paymentOption, setPaymentOption] = useState("");
-  const handlePlaceOrder = () => {
-    if (paymentOption) {
-      Swal.fire({
-        title: "Order Placed!",
-        text: `You have chosen to pay ${paymentOption}.`,
-        icon: "success",
-      }).then(() => {
-        setPayment(false);
-        router.push(`order-placed`);
+  const [isCart, setCart] = useState(false);
+  const { mutation, isLoading } = useMutation();
+  const { mutation: postMutation } = useMutation();
+  const [productId, setProductId] = useState();
+  const [addressId, setAddressId] = useState();
+
+  const handlePlaceOrder = async () => {
+    try {
+      let res: ResType;
+
+      res = await postMutation(`order/cart`, {
+        method: "POST",
+        isAlert: true,
+        body: {
+          addressId,
+          paymentType: paymentOption,
+        },
       });
-    } else {
-      Swal.fire({
-        title: "Error",
-        text: "Please select a payment option.",
-        icon: "error",
-      });
+
+      if (paymentOption) {
+        Swal.fire({
+          title: "Order Placed!",
+          text: `You have chosen to pay ${paymentOption}.`,
+          icon: "success",
+        }).then(() => {
+          setPayment(false);
+          router.push(`userOrders`);
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Please select a payment option.",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      errorHelper(error);
     }
   };
 
-  const { mutation, isLoading } = useMutation();
-  const { user } = useAuth();
-  console.log(user, "User Data");
-
-  const { data } = useSwr<{ data: any[] }>(`address`);
-  console.log(data?.data);
-  console.log(data, "Address GET");
+  const { data, mutate } = useSwr<{ data: any[] }>(`address`);
 
   const handleDeleteAddress = (id: string) => {
     try {
@@ -68,12 +83,16 @@ export default function BuyNow() {
             method: "DELETE",
             isAlert: true,
           });
-          // mutate();
+          mutate();
         }
       });
     } catch (error) {
       errorHelper(error);
     }
+  };
+
+  const handleRadioChange = (event: any) => {
+    setAddressId(event.target.value); // Update the selected address ID when a radio button is clicked
   };
 
   return (
@@ -88,8 +107,34 @@ export default function BuyNow() {
               </h1>
             </Link>
           </div>
+
           <div className="flex admin-gap">
             <div className="flex flex-col admin-gap w-3/5 bottom-spacing">
+              <div className="flex justify-between items-center admin-card">
+                <div className="text-xl font-semibold text-primary-text">
+                  Shopping Cart
+                </div>
+                <div
+                  className={`text-xl cursor-pointer `}
+                  onClick={() => setCart((prevState) => !prevState)}
+                >
+                  {isCart ? (
+                    <p className="rotate-180 bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
+                      <FaAngleDown />
+                    </p>
+                  ) : (
+                    <p className="bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
+                      <FaAngleDown />
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {isCart && (
+                <div className="">
+                  <AddToCart setProductId={setProductId} />
+                </div>
+              )}
               <div className="flex flex-col admin-gap">
                 <div className="flex justify-between items-center admin-card">
                   <div className="text-xl font-semibold text-primary-text">
@@ -113,31 +158,46 @@ export default function BuyNow() {
                 {isAddress && (
                   <>
                     <div className="flex gap-2 items-center admin-card">
-                      <input type="checkbox" />
                       <div className="p-2 rounded-md w-full">
-                        <div className="flex justify-between">
-                          <p>
-                            Infront Y-6, Civil Township, Rourkela - 769004,
-                            Odisha
-                          </p>
-                          <p className="flex">
-                            <Tooltip title="Delete">
-                              <p
-                                className="p-2 rounded bg-youtube text-white cursor-pointer "
-                                // onClick={handleDeleteAddress}
-                              >
-                                <MdDeleteOutline className="text-xl" />
-                              </p>
-                            </Tooltip>
-                          </p>
-                        </div>
-                        <div className="flex gap-1 items-center font-medium">
-                          <span>
-                            <FaPhoneAlt />
-                          </span>
-                          <span>1203256488</span>
-                        </div>
-                        <p>Work</p>
+                        {data?.data?.map((item, i) => (
+                          <div className="flex gap-2" key={i}>
+                            <input
+                              type="radio"
+                              id={item._id}
+                              value={item?._id}
+                              checked={addressId === item._id}
+                              onChange={handleRadioChange}
+                            />
+                            <div className="w-full">
+                              <div className="flex justify-between">
+                                <p>
+                                  {item?.houseNo}, {item?.landmark},{" "}
+                                  {item?.street},{item?.city}, {item?.state} ,{" "}
+                                </p>
+                                <p className="flex">
+                                  <Tooltip title="Delete">
+                                    <p
+                                      className="p-2 rounded bg-youtube text-white cursor-pointer "
+                                      onClick={() =>
+                                        handleDeleteAddress(item?._id)
+                                      }
+                                    >
+                                      <MdDeleteOutline className="text-xl" />
+                                    </p>
+                                  </Tooltip>
+                                </p>
+                              </div>
+                              <div className="flex gap-1 items-center font-medium">
+                                <span>
+                                  <FaPhoneAlt />
+                                </span>
+                                <span>
+                                  {item?.phone} , {item?.alternatePhone}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                     <div
@@ -149,60 +209,6 @@ export default function BuyNow() {
                   </>
                 )}
 
-                <div className="flex justify-between items-center  admin-card">
-                  <div className="text-xl font-semibold text-primary-text">
-                    ORDER SUMMARY
-                  </div>
-                  <div
-                    className={`text-xl cursor-pointer `}
-                    onClick={() => setIsSummary((prevState) => !prevState)}
-                  >
-                    {isSummary ? (
-                      <p className="rotate-180 bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
-                        <FaAngleDown />
-                      </p>
-                    ) : (
-                      <p className="bg-pink-blue/10 text-pink-blue p-1 rounded-md h-fit">
-                        <FaAngleDown />
-                      </p>
-                    )}
-                  </div>
-                </div>
-                {isSummary && (
-                  <div className="admin-card flex flex-col gap-4">
-                    <hr />
-                    <div className="flex gap-2 ">
-                      <div className="flex flex-col gap-3">
-                        <img
-                          src=""
-                          alt="order"
-                          className="w-36 h-44 rounded-md border border-gary-300"
-                        />
-                        <p className="text-lg text-center font-semibold">
-                          Quantity - 2
-                        </p>
-                      </div>
-                      <div className="flex flex-col">
-                        <p className="text-xl text-primary-text font-semibold">
-                          Air Jordan 7 Retro
-                        </p>
-                        <p className="text-sm font-medium text-primary-text">
-                          Men Shoes, Nike
-                        </p>
-                        <p className="font-medium">12,900</p>
-                      </div>
-                    </div>
-                    <hr />
-                    <div className="flex justify-end">
-                      <button
-                        className="p-2 w-fit rounded cursor-pointer bg-whatsapp text-white"
-                        onClick={() => setIsSummary(false)}
-                      >
-                        Continue
-                      </button>
-                    </div>
-                  </div>
-                )}
                 <div className="flex justify-between items-center  admin-card">
                   <div className="text-xl font-semibold text-primary-text">
                     PAYMENT
@@ -233,19 +239,20 @@ export default function BuyNow() {
                           type="radio"
                           name="paymentOption"
                           value="COD"
-                          onChange={() => setPaymentOption("Cash on Delivery")}
+                          onChange={() => setPaymentOption("cod")}
                         />
                         Pay with Cash on Delivery (COD)
                       </label>
-                      <label className="flex gap-2">
+                      {/* <label className="flex gap-2">
                         <input
                           type="radio"
                           name="paymentOption"
                           value="online"
+                          disabled={true}
                           onChange={() => setPaymentOption("Online")}
                         />
                         Pay Online
-                      </label>
+                      </label> */}
                     </div>
                     <hr />
                     <div className="flex justify-end">

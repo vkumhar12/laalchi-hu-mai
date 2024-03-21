@@ -5,6 +5,7 @@ import useAuth from "@/hooks/useAuth";
 import AdminLayout from "@/layout/admin";
 import { sweetAlertCustomStyles, sweetAlertStyles } from "@/utils";
 import errorHelper from "@/utils/error";
+import router from "next/router";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { IoMdAdd } from "react-icons/io";
@@ -60,7 +61,11 @@ export default function ManageProducts() {
               <p>
                 <IoMdAdd className="text-2xl" />
               </p>
-              <span>Add Product</span>
+              <button
+                onClick={() => router.push(`/admin/product/add-products`)}
+              >
+                Add Product
+              </button>
             </div>
           </div>
           <div className="max-w-full overflow-x-scroll scroll-bar-none">
@@ -86,7 +91,7 @@ export default function ManageProducts() {
                     }`}
                   >
                     <img
-                      src={data?.productPhoto}
+                      src={data?.images?.[0]?.url}
                       alt={data?.productPhoto}
                       className="w-14 h-14 border-2 p-1 col-span-1"
                     />

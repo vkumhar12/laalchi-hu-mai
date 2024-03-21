@@ -1,4 +1,4 @@
-// import { Loader } from "@/components/core";
+/* eslint-disable react-hooks/exhaustive-deps */
 import Loader from "@/components/core/Loader";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
@@ -12,27 +12,33 @@ type PassedComponentProps = {
 };
 
 const withProtectedRoute = (
-  PassedComponent: React.ComponentType<PassedComponentProps>
+  PassedComponent: React.ComponentType<PassedComponentProps>,
+  allowedRoles: string[]
 ) =>
   function NewComponent(props: PassedComponentProps) {
     const { user, isUserLoading } = useAuth();
-    const { push, asPath } = useRouter();
-    const urlRole = asPath.split("/")[1];
+    const { push } = useRouter();
     let mounted = useRef<boolean>(false);
+
     useEffect(() => {
       mounted.current = true;
-      if (!isUserLoading && !user?.id) push("/");
-      if (!isUserLoading && user?.isBlocked) push("/");
-      if (!isUserLoading && user?.role && user?.role.toLowerCase() !== urlRole)
-        push("/");
+      if (!isUserLoading) {
+        if (!user) {
+          // User not authenticated, redirect to login
+          push("/");
+        } else if (!allowedRoles.includes(user.role)) {
+          // User is authenticated but doesn't have the required role, redirect to appropriate page
+          push("/");
+        }
+      }
       return () => {
         mounted.current = false;
       };
-    }, [isUserLoading, user, push, urlRole, asPath]);
+    }, [isUserLoading, user, push, allowedRoles]);
 
     return (
       <>
-        {user?.id && user?.role ? (
+        {user && allowedRoles.includes(user.role) ? (
           <PassedComponent {...props} />
         ) : (
           <Loader visible={true} />
